@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="rooms_list">
+        <item>Skype</item>
+        <item>Peach</item>
+        <item>Mario</item>
+        <item>Luigi</item>
+        <item>Yoshi</item>
+        <item>Toad</item>
+        <item>Zelda</item>
+        <item>Link</item>
+        <item>Impa</item>
+        <item>Epona</item>
+    </string-array>
+</resources>

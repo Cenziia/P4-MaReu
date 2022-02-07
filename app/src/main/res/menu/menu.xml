@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="@drawable/ic_baseline_delete_24">
+
+    <item android:id="@+id/dateFilter"
+        android:title="@string/filter_by_date"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/roomFilter"
+        android:title="@string/room"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/room_skype"
+                android:title="@string/skype"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_peach"
+                android:title="@string/peach"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_mario"
+                android:title="@string/mario"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_luigi"
+                android:title="@string/luigi"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_yoshi"
+                android:title="@string/yoshi"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_toad"
+                android:title="@string/toad"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_zelda"
+                android:title="@string/zelda"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_link"
+                android:title="@string/link"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_impa"
+                android:title="@string/impa"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/room_epona"
+                android:title="@string/epona"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
+
+    <item android:id="@+id/resetFilter"
+        android:title="@string/reset_filter"
+        app:showAsAction="never"/>
+
+</menu>

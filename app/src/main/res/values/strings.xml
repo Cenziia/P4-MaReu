@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MaRéu_v5</string>
+    <string name="add">Ajouter</string>
+    <string name="meeting_circle">meeting circle</string>
+    <string name="delete_button">delete button</string>
+    <string name="filter_by_date">Filtrer par date</string>
+    <string name="room">Filtrer par salle</string>
+    <string name="available_rooms">Salles disponibles</string>
+    <string name="participant_name">Nom du participant</string>
+    <string name="description">Description</string>
+    <string name="validation_btn">Valider</string>
+    <string name="hour_picker_btn_start">Heure de début</string>
+    <string name="hour_picker_btn_end">Heure de fin</string>
+    <string name="date_picker_btn">Date</string>
+    <string name="participants">Participants</string>
+    <string name="email_invalid">Adresse mail non valide</string>
+    <string name="subject">Sujet de la réunion</string>
+    <string name="on_time_set_text_title">Début de la réunion</string>
+    <string name="date_time">%1$02d:%2$02d</string>
+    <string name="reset_filter">Réinitialiser</string>
+    <string name="skype">Skype</string>
+    <string name="peach">Peach</string>
+    <string name="mario">Mario</string>
+    <string name="luigi">Luigi</string>
+    <string name="yoshi">Yoshi</string>
+    <string name="toad">Toad</string>
+    <string name="zelda">Zelda</string>
+    <string name="link">Link</string>
+    <string name="impa">Impa</string>
+    <string name="epona">Epona</string>
+    <string name="spaceListIemTxt">\t-\t</string>
+
+</resources>
