@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import cynthianoel.mareu.R;
 import cynthianoel.mareu.databinding.ActivityMeetingListBinding;
@@ -30,7 +31,7 @@ import cynthianoel.mareu.utils.DatePickerFragment;
 public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private ActivityMeetingListBinding binding;
-    private ArrayList<Meeting> mMeetings = new ArrayList<>();
+    private List<Meeting> mMeetings = new ArrayList<>();
     private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
 
     @Override
@@ -68,7 +69,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     private void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.meetingListRecyclerView.setLayoutManager(layoutManager);
-        MeetingListActivityAdapter meetingListActivityAdapter = new MeetingListActivityAdapter(mMeetings);
+        MeetingListActivityAdapter meetingListActivityAdapter = new MeetingListActivityAdapter((ArrayList<Meeting>) mMeetings);
         binding.meetingListRecyclerView.setAdapter(meetingListActivityAdapter);
     }
 
@@ -93,11 +94,12 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
                 resetFilter();
                 return true;
             default:
-                mMeetings.clear();
-                mMeetings.addAll(mMeetingApiService.getMeetingFilteredByRoom(item.getTitle().toString()));
-                requireNonNull(requireNonNull(binding.meetingListRecyclerView).getAdapter()).notifyDataSetChanged();
+                //mMeetings.clear();
+                //mMeetings.addAll(mMeetingApiService.getMeetingFilteredByRoom(item.getTitle().toString()));
+                mMeetings = mMeetingApiService.getMeetingFilteredByRoom(item.getTitle().toString());
+                //requireNonNull(requireNonNull(binding.meetingListRecyclerView).getAdapter()).notifyDataSetChanged();
+                initRecyclerView();
                 return true;
-
         }
     }
 
@@ -121,9 +123,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
 
     @SuppressLint("NotifyDataSetChanged")
     public void resetFilter() {
-        mMeetings.clear();
-        mMeetings.addAll(mMeetingApiService.getMeetings());
-        requireNonNull(requireNonNull(binding.meetingListRecyclerView).getAdapter()).notifyDataSetChanged();
+        mMeetings = mMeetingApiService.getMeetings();
+        initRecyclerView();
     }
     @SuppressLint("NotifyDataSetChanged")
     @Override

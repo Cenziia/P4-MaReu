@@ -41,7 +41,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             public void onClick(View v) {
                     mMeetings.remove(holder.getAbsoluteAdapterPosition());
                     notifyItemRemoved(holder.getAbsoluteAdapterPosition());
-                    notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), getItemCount());
+                    notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
             }
         });
 

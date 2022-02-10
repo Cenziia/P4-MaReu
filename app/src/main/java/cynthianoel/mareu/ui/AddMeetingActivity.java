@@ -22,9 +22,11 @@ import java.sql.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import cynthianoel.mareu.R;
@@ -46,8 +48,11 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     String callback = "";
 
-    private Calendar mCalTime;
     private Calendar mCalDate;
+    protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+
+
+
     //private final String datePattern = "dd/MM/yyyy";
     //private final String hourPattern = "HH:mm:ss";
     //DateFormat mDateFormat = new SimpleDateFormat(datePattern);
@@ -154,17 +159,27 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         datePicker.setMinDate(System.currentTimeMillis() - 1000);
-        String date = datePicker.getDayOfMonth() + "/" + (datePicker.getMonth() + 1) + "/" + datePicker.getYear();
+        //String date = datePicker.getDayOfMonth() + "/" + (datePicker.getMonth() + 1) + "/" + datePicker.getYear();
         mCalDate = Calendar.getInstance();
-        mCalDate.set(year, month, dayOfMonth);
+        mCalDate.set(year, month, dayOfMonth);;
+        Date date1 = mCalDate.getTime();
+        String date = dateFormat.format(date1);
+        System.out.println("OKKKKKKKKKKKKKKKKKKKKKKKKKKKK" + date1);
         binding.btnDatePicker.setText(String.format("%s%s", "Date : ", date));
+    }
+
+    public static String formatterDate(Date date) {
+        return dateFormat.format(date);
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
         if (callback.equalsIgnoreCase("for_start_time") ) {
+            mCalDate.set(Calendar.HOUR_OF_DAY, hour);
+            mCalDate.set(Calendar.MINUTE, minute);
             binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ",getString(R.string.date_time, hour, minute)));
         } else if (callback.equalsIgnoreCase("for_end_time")) {
+
             binding.btnHourPickerEnd.setText(String.format("%s%s", "Fin : ",getString(R.string.date_time, hour, minute)));
         }
         callback = "";
@@ -244,7 +259,9 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             binding.roomsAvailableTxt.setError("Please choose a room");
         }
 
-        mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, hourStart, hourEnd, description, mDate));
+        Date mDate2 = mCalDate.getTime();
+System.out.println("OKKKKKKKKKKKKKK" + mDate2);
+        mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, hourStart, hourEnd, description, mDate2));
         Toast.makeText(this, "Réunion créée !", Toast.LENGTH_SHORT).show();
         finish();
 
