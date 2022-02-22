@@ -1,35 +1,58 @@
 package cynthianoel.mareu.data;
 
-import android.app.DatePickerDialog;
-import android.widget.DatePicker;
+import android.graphics.Color;
+import android.widget.ImageView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
+import cynthianoel.mareu.R;
 import cynthianoel.mareu.model.Meeting;
 
 public abstract class DummyMeetingGenerator {
 
+    protected static Calendar calA = getCalA();
+    protected static Calendar calB = getCalB();
+    protected static Calendar calC = getCalC();
 
+    //protected static int color = R.color.greenCircle;
+    //protected static int color1 = R.color.white;
 
-    // TODO : Ajouter les participants à la première réunion
 
     private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-            new Meeting("Réunion A", "à remplacer", "Peach","14h00","", "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime()),
-            new Meeting("Réunion B", "paul@lamzone.com"+", "+"viviane@lamzone.com", "Mario","16h00","","Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime()),
-            new Meeting("Réunion C", "amandine@lamzone.com"+", "+"luc@lamzone.com", "Luigi","19h00","","Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime())
+            new Meeting("Réunion A", "maxime@lamzone.com"+", "+"alex@lamzone.com", "Peach",calA.getTime(), Calendar.getInstance().getTime(), "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), R.color.greenCircle),
+            new Meeting("Réunion B", "paul@lamzone.com"+", "+"viviane@lamzone.com", "Mario",calB.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.RED),
+            new Meeting("Réunion C", "amandine@lamzone.com"+", "+"luc@lamzone.com", "Luigi",calC.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.YELLOW)
             );
 
     static List<Meeting> generateMeetings(){
         return new ArrayList<>(DUMMY_MEETINGS);
     }
+
+    public static Calendar getCalA() {
+        calA = Calendar.getInstance();
+        calA.set(Calendar.HOUR_OF_DAY,14);
+        calA.set(Calendar.MINUTE,0);
+        calA.set(Calendar.SECOND, 0);
+        return calA;
+    }
+
+    public static Calendar getCalB() {
+        calB = Calendar.getInstance();
+        calB.set(Calendar.HOUR_OF_DAY,16);
+        calB.set(Calendar.MINUTE,0);
+        calB.set(Calendar.SECOND, 0);
+        return calB;
+    }
+
+    public static Calendar getCalC() {
+        calC = Calendar.getInstance();
+        calC.set(Calendar.HOUR_OF_DAY,19);
+        calC.set(Calendar.MINUTE,0);
+        calC.set(Calendar.SECOND, 0);
+        return calC;
+    }
+
 }

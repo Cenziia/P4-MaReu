@@ -16,7 +16,7 @@
     <string name="email_invalid">Adresse mail non valide</string>
     <string name="subject">Sujet de la réunion</string>
     <string name="on_time_set_text_title">Début de la réunion</string>
-    <string name="date_time">%1$02d:%2$02d</string>
+    <string name="date_time">%1$02dh%2$02d</string>
     <string name="reset_filter">Réinitialiser</string>
     <string name="skype">Skype</string>
     <string name="peach">Peach</string>

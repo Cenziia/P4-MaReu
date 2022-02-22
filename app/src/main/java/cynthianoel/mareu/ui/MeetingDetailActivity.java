@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
+import cynthianoel.mareu.R;
 import cynthianoel.mareu.databinding.ActivityMeetingDetailBinding;
 import cynthianoel.mareu.di.DI;
 import cynthianoel.mareu.model.Meeting;
@@ -27,6 +28,7 @@ public class MeetingDetailActivity extends AppCompatActivity {
     private static final String TAG = MeetingDetailActivity.class.getSimpleName();
 
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+    protected static final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
 
     public static Intent newInstance(final Context context, final Meeting meeting) {
         Log.d(TAG, "> newInstance");
@@ -49,7 +51,11 @@ public class MeetingDetailActivity extends AppCompatActivity {
 
         binding.meetingDetailSubject.setText(meeting.getSubject());
         //binding.meetingDetailDate.setText((CharSequence) meeting.getDate());
-        binding.meetingDetailHour.setText(meeting.getHourStart());
+
+        Date mHour = meeting.getHourStart();
+        String hour = hourFormat.format(mHour);
+        binding.meetingDetailHour.setText(String.format("%s%s", " Début : ", hour));
+
         binding.meetingDetailParticipants.setText(meeting.getParticipants());
         binding.meetingDetailRoom.setText(meeting.getMeetingRoom());
         binding.meetingDetailDescription.setText(meeting.getDescription());

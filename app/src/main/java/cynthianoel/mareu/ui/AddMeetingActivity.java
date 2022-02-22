@@ -19,15 +19,13 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 
 import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
 
 import cynthianoel.mareu.R;
 import cynthianoel.mareu.databinding.ActivityAddMeetingBinding;
@@ -35,7 +33,6 @@ import cynthianoel.mareu.di.DI;
 import cynthianoel.mareu.model.Meeting;
 import cynthianoel.mareu.model.MeetingRoom;
 import cynthianoel.mareu.service.MeetingApiService;
-import cynthianoel.mareu.utils.DatePickerFragment;
 import cynthianoel.mareu.utils.TimePickerFragment;
 
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
@@ -168,15 +165,17 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         binding.btnDatePicker.setText(String.format("%s%s", "Date : ", date));
     }
 
-    public static String formatterDate(Date date) {
+    /*public static String formatterDate(Date date) {
         return dateFormat.format(date);
-    }
+    }*/
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
         if (callback.equalsIgnoreCase("for_start_time") ) {
             mCalDate.set(Calendar.HOUR_OF_DAY, hour);
             mCalDate.set(Calendar.MINUTE, minute);
+            mCalDate.set(Calendar.SECOND, 0);
+            System.out.println("STAAAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAART" +mCalDate.getTime().toString());
             binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ",getString(R.string.date_time, hour, minute)));
         } else if (callback.equalsIgnoreCase("for_end_time")) {
 
@@ -260,8 +259,10 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         }
 
         Date mDate2 = mCalDate.getTime();
+        Date mTime = mCalDate.getTime();
 System.out.println("OKKKKKKKKKKKKKK" + mDate2);
-        mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, hourStart, hourEnd, description, mDate2));
+System.out.println("OOOOOOOOOOOOOOOOOOOKKKKKKKKKKKKKKKKK" + mTime);
+        mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, mTime, mTime, description, mDate2, R.drawable.ic_baseline_circle_24));
         Toast.makeText(this, "Réunion créée !", Toast.LENGTH_SHORT).show();
         finish();
 

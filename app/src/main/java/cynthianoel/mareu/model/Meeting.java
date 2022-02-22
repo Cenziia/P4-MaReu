@@ -2,9 +2,13 @@ package cynthianoel.mareu.model;
 
 import static java.lang.System.out;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
 
+import java.sql.Time;
 import java.util.Date;
 import java.util.Objects;
 
@@ -15,9 +19,11 @@ import cynthianoel.mareu.ui.AddMeetingActivity;
  */
 
 public class Meeting implements Parcelable {
-    private String subject, participants, meetingRoom, description, hourStart, hourEnd;
+    private String subject, participants, meetingRoom, description/*, hourStart, hourEnd*/;
     //private Date date;
     private long date;
+    private long hourStart, hourEnd;
+    private int circleColor;
 
     /**
      * Constructor
@@ -29,16 +35,18 @@ public class Meeting implements Parcelable {
      * @param hourEnd
      * @param description
      * @param date
+     * @param circleColor
      */
-    public Meeting(String subject, String participants, String meetingRoom, String hourStart, String hourEnd, String description, Date date) {
+    public Meeting(String subject, String participants, String meetingRoom, Date hourStart, Date hourEnd, String description, Date date, int circleColor) {
 
         this.subject = subject;
         this.participants = participants;
         this.meetingRoom = meetingRoom;
-        this.hourStart = hourStart;
-        this.hourEnd = hourEnd;
+        this.hourStart = hourStart.getTime();
+        this.hourEnd = hourEnd.getTime();
         this.description = description;
         this.date = date.getTime();
+        this.circleColor = circleColor;
     }
 
 
@@ -66,20 +74,20 @@ public class Meeting implements Parcelable {
         this.meetingRoom = meetingRoom;
     }
 
-    public String getHourStart() {
-        return hourStart;
+    public Date getHourStart() {
+        return new Date(hourStart);
     }
 
-    public void setHourStart(String hourStart) {
-        this.hourStart = hourStart;
+    public void setHourStart(Date hourStart1) {
+        hourStart = hourStart1.getTime();
     }
 
-    public String getHourEnd() {
-        return hourEnd;
+    public Date getHourEnd() {
+        return new Date(hourEnd);
     }
 
-    public void setHourEnd(String hourEnd) {
-        this.hourEnd = hourEnd;
+    public void setHourEnd(Date hourEnd1) {
+        hourEnd = hourEnd1.getTime();
     }
 
     public Date getDate() {
@@ -97,6 +105,10 @@ public class Meeting implements Parcelable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public int getCircleColor() { return circleColor;}
+
+    public void setCircleColor(int circleColor) { this.circleColor = circleColor; }
 
 
     @Override
@@ -124,8 +136,8 @@ public class Meeting implements Parcelable {
         dest.writeString(meetingRoom);
         dest.writeString(description);
         //dest.writeString(String.valueOf(date));
-        dest.writeString(hourStart);
-        dest.writeString(hourEnd);
+        dest.writeLong(hourStart);
+        dest.writeLong(hourEnd);
         //dest.writeLong(date);
         //dest.writeLong(date != null ? date.getTime() : -1);
        //dest.writeLong(date.getTime());
@@ -140,13 +152,14 @@ public class Meeting implements Parcelable {
         participants = in.readString();
         meetingRoom = in.readString();
         description = in.readString();
-        hourStart = in.readString();
-        hourEnd = in.readString();
+        hourStart = in.readLong();
+        hourEnd = in.readLong();
         //date = (Date) in.readSerializable();
         //date = new Date(in.readLong());
         //long tmpDate = in.readLong();
         //this.date = tmpDate == -1 ? null : new Date(tmpDate);
         date = in.readLong();
+        circleColor = in.readInt();
 
 
     }

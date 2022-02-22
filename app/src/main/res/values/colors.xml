@@ -10,4 +10,7 @@
     <color name="dark_red">#FFCA0108</color>
     <color name="dark_gray">#434343</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="greenCircle">#FF03FBC9</color>
+    <color name="orangeCircle">#FFCA8808</color>
+    <color name="redCircle">#FFDA0008</color>
 </resources>

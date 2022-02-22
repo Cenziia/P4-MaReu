@@ -1,11 +1,15 @@
 package cynthianoel.mareu.data;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 
+import cynthianoel.mareu.R;
 import cynthianoel.mareu.model.Employee;
 import cynthianoel.mareu.model.Meeting;
 import cynthianoel.mareu.model.MeetingRoom;
@@ -74,15 +78,37 @@ public class DummyMeetingApiService implements MeetingApiService {
                 return meetingsAvailable;
         }
 
+    public int setCircle(Meeting meeting) {
+        int color = 0;
+       /* Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        Date date1 = new Date(meeting.getHourStart().getTime() * 1000);
+        long meet = meeting.getHourStart().getTime();
+        //long diff = cal.getTime() -meet;
+
+        for (Meeting i : meetings) {
+            if (date1 == date) {
+                color = R.color.greenCircle;
+            }
+            else {
+                color = R.color.greenCircle;
+            }*/
+
+            return color;
+        }
+
+
+    //}
+
     @Override
     public void addMeeting(Meeting meeting) {
         meetings.add(meeting);
     }
 
-    @Override
+    /*@Override
     public void deleteMeeting(Meeting meeting) {
         meetings.remove(meeting);
-    }
+    }*/
 
     /*@Override
     public boolean roomIsAvailable(String meetingRoom, Date mDate, DateTimeFormatter time) {
