@@ -1,7 +1,6 @@
 package cynthianoel.mareu.ui;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import cynthianoel.mareu.R;
-import cynthianoel.mareu.di.DI;
 import cynthianoel.mareu.model.Meeting;
-import cynthianoel.mareu.service.MeetingApiService;
 
 public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingListActivityAdapter.ViewHolder> {
 
@@ -44,7 +40,6 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Meeting meeting = mMeetings.get(position);
         holder.displayMeeting(mMeetings.get(position));
-        //holder.mImageView.setColorFilter(R.color.redCircle);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,28 +92,40 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             mHour.setText(String.format(hour) + " - ");
             mMeetingRoom.setText(meeting.getMeetingRoom());
             mEmails.setText(meeting.getParticipants());
-
-            //mImageView.getDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
             setCircleColor(meeting);
+            mImageView.getDrawable().setColorFilter(meeting.getCircleColor(), PorterDuff.Mode.MULTIPLY);
         }
 
         public void setCircleColor(Meeting meeting){
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date date1 = meeting.getDate();
-            String date2 = sdf.format(date1);
-            Calendar cal = Calendar.getInstance();
-            Date cal1 = cal.getTime();
-            String cal2 = sdf.format(cal1);
-            System.out.println(date2);
-            System.out.println(date1);
-            System.out.println(cal2);
-            if (/*date.equals("22/02/2022")*/ date2.equals(cal2)) {
-                //meeting.setCircleColor(Color.GREEN);
-                mImageView.getDrawable().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY);
-            } else {
-                mImageView.getDrawable().setColorFilter(meeting.getCircleColor(), PorterDuff.Mode.MULTIPLY);
+            SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+            Date meetingDate = meeting.getDate();
+            Date meetingHour = meeting.getHourStart();
+            String meetingDateString = sdfDate.format(meetingDate);
+
+            // If meeting append in less than one hour on current day
+            if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.before(MeetingListActivity.addHour(1)) && meetingHour.after(MeetingListActivity.addHour(0))) {
+                meeting.setCircleColor(Color.RED);
+            }
+            // If meeting append in more than one day
+            else if (meetingDate.after(MeetingListActivity.addDay(1))) {
+                meeting.setCircleColor(Color.BLUE);
+            }
+            // If meeting time is passed
+            else if (meetingHour.before(MeetingListActivity.addHour(-1))) {
+                meeting.setCircleColor(Color.GRAY);
+            }
+            // If meeting is between one and three hours
+            else if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.before(MeetingListActivity.addHour(3)) && meetingHour.after(MeetingListActivity.addHour(1))) {
+                meeting.setCircleColor(Color.parseColor("#FFAC1C"));
+            }
+            // If meeting is today after 3 hours
+            else if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.after(MeetingListActivity.addHour(3))) {
+                meeting.setCircleColor(Color.GREEN);
+            }
+            // If meeting is tomorrow/ in 24
+            else if (meetingDateString.equals(MeetingListActivity.tomorrow())) {
+                meeting.setCircleColor(Color.CYAN);
             }
         }
     }
-
 }

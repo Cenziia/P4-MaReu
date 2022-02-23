@@ -1,26 +1,16 @@
 package cynthianoel.mareu.model;
 
-import static java.lang.System.out;
-
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
 
-import java.sql.Time;
 import java.util.Date;
-import java.util.Objects;
-
-import cynthianoel.mareu.ui.AddMeetingActivity;
 
 /**
  * Model object representing a Meeting Room
  */
 
 public class Meeting implements Parcelable {
-    private String subject, participants, meetingRoom, description/*, hourStart, hourEnd*/;
-    //private Date date;
+    private String subject, participants, meetingRoom, description;
     private long date;
     private long hourStart, hourEnd;
     private int circleColor;
@@ -135,16 +125,9 @@ public class Meeting implements Parcelable {
         dest.writeString(participants);
         dest.writeString(meetingRoom);
         dest.writeString(description);
-        //dest.writeString(String.valueOf(date));
         dest.writeLong(hourStart);
         dest.writeLong(hourEnd);
-        //dest.writeLong(date);
-        //dest.writeLong(date != null ? date.getTime() : -1);
-       //dest.writeLong(date.getTime());
-        //dest.writeSerializable(date);
-        //dest.writeLong(date != null ? date.getTime() : -1);
         dest.writeLong(date);
-        System.out.println("OUZIBUFKUVYTVTFCTRFCTUYVYGVYGVYFCYVCYGVICYCYVYVGVKUVYTVIYVTVYJVYVYGV"+date);
     }
 
     protected Meeting(Parcel in) {
@@ -154,14 +137,8 @@ public class Meeting implements Parcelable {
         description = in.readString();
         hourStart = in.readLong();
         hourEnd = in.readLong();
-        //date = (Date) in.readSerializable();
-        //date = new Date(in.readLong());
-        //long tmpDate = in.readLong();
-        //this.date = tmpDate == -1 ? null : new Date(tmpDate);
         date = in.readLong();
         circleColor = in.readInt();
-
-
     }
 
     public static final Creator<Meeting> CREATOR = new Creator<Meeting>() {

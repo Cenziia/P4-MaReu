@@ -1,14 +1,12 @@
 package cynthianoel.mareu.data;
 
 import android.graphics.Color;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-import cynthianoel.mareu.R;
 import cynthianoel.mareu.model.Meeting;
 
 public abstract class DummyMeetingGenerator {
@@ -17,12 +15,8 @@ public abstract class DummyMeetingGenerator {
     protected static Calendar calB = getCalB();
     protected static Calendar calC = getCalC();
 
-    //protected static int color = R.color.greenCircle;
-    //protected static int color1 = R.color.white;
-
-
     private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-            new Meeting("Réunion A", "maxime@lamzone.com"+", "+"alex@lamzone.com", "Peach",calA.getTime(), Calendar.getInstance().getTime(), "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), R.color.greenCircle),
+            new Meeting("Réunion A", "maxime@lamzone.com"+", "+"alex@lamzone.com", "Peach",calA.getTime(), Calendar.getInstance().getTime(), "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.parseColor("#FF03FBC9")),
             new Meeting("Réunion B", "paul@lamzone.com"+", "+"viviane@lamzone.com", "Mario",calB.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.RED),
             new Meeting("Réunion C", "amandine@lamzone.com"+", "+"luc@lamzone.com", "Luigi",calC.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.YELLOW)
             );

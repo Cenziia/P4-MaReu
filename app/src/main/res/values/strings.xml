@@ -29,5 +29,6 @@
     <string name="impa">Impa</string>
     <string name="epona">Epona</string>
     <string name="spaceListIemTxt">\t-\t</string>
+    <string name="validation">Validation button</string>
 
 </resources>

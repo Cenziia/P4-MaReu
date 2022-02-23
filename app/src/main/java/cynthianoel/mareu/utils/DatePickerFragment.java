@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
-import java.util.TimeZone;
 
 public class DatePickerFragment extends DialogFragment {
     @NonNull
