@@ -149,7 +149,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         ChipDrawable drawable = ChipDrawable.createFromAttributes(this, null, 0, R.style.Widget_MaterialComponents_Chip_Entry);
         chip.setChipDrawable(drawable);
         chip.setCheckable(false);
-        chip.setChipIconResource(R.drawable.ic_baseline_delete_24);
+        chip.setChipIconResource(R.drawable.ic_baseline_person_24);
         chip.setText(Objects.requireNonNull(binding.tiEdParticipants.getText()).toString());
         chip.setOnCloseIconClickListener(view -> binding.chipGroupParticipants.removeView(chip));
         binding.chipGroupParticipants.addView(chip);

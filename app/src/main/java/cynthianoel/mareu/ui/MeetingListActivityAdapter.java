@@ -98,12 +98,14 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
 
         public void setCircleColor(Meeting meeting){
             SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+            SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
             Date meetingDate = meeting.getDate();
             Date meetingHour = meeting.getHourStart();
             String meetingDateString = sdfDate.format(meetingDate);
+            String meetingHourString = sdfHour.format(meetingHour);
 
             // If meeting append in less than one hour on current day
-            if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.before(MeetingListActivity.addHour(1)) && meetingHour.after(MeetingListActivity.addHour(0))) {
+            if (meetingDateString.equals(MeetingListActivity.today()) && meetingHourString.equals(MeetingListActivity.currentHour())) {
                 meeting.setCircleColor(Color.RED);
             }
             // If meeting append in more than one day
@@ -122,7 +124,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             else if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.after(MeetingListActivity.addHour(3))) {
                 meeting.setCircleColor(Color.GREEN);
             }
-            // If meeting is tomorrow/ in 24
+            // If meeting is tomorrow
             else if (meetingDateString.equals(MeetingListActivity.tomorrow())) {
                 meeting.setCircleColor(Color.CYAN);
             }
