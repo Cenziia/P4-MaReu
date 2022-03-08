@@ -77,5 +77,10 @@ public class DummyMeetingApiService implements MeetingApiService {
     public void addMeeting(Meeting meeting) {
         meetings.add(meeting);
     }
+
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        meetings.remove(meeting);
+    }
 }
 

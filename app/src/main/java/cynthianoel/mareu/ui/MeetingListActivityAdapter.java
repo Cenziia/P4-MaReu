@@ -12,17 +12,23 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import cynthianoel.mareu.R;
+import cynthianoel.mareu.databinding.ItemMeetingBinding;
+import cynthianoel.mareu.di.DI;
 import cynthianoel.mareu.model.Meeting;
+import cynthianoel.mareu.service.MeetingApiService;
 
 public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingListActivityAdapter.ViewHolder> {
 
     private final ArrayList<Meeting> mMeetings;
+
+    private final MeetingApiService meetingApiService = DI.getMeetingApiService();
 
     public MeetingListActivityAdapter(ArrayList<Meeting> meetingArrayList) {
         this.mMeetings = meetingArrayList;
@@ -44,9 +50,11 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    mMeetings.remove(holder.getAbsoluteAdapterPosition());
-                    notifyItemRemoved(holder.getAbsoluteAdapterPosition());
-                    notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
+                meetingApiService.deleteMeeting(meeting);
+
+               //mMeetings.remove(holder.getAbsoluteAdapterPosition());
+               notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+               notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
             }
         });
 
@@ -63,9 +71,10 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         return mMeetings.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/ {
 
-        protected static final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
+        //private MeetingApiService mMeetingApiService;
+        protected final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
 
         private final TextView mSubject;
         private final TextView mHour;
@@ -82,7 +91,15 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             mEmails = itemView.findViewById(R.id.emailsTxt);
             mDeleteButton = itemView.findViewById(R.id.deleteButton);
             mImageView = itemView.findViewById(R.id.circleImg);
+
+            /*mDeleteButton.setOnClickListener(this);*/
         }
+
+        /*public void onClick(View v) {
+            if(v.equals(mDeleteButton)) {
+                removeAt(mMeetings.get(getAbsoluteAdapterPosition()));
+            }
+        }*/
 
         public void displayMeeting(Meeting meeting){
             Date hourDate = meeting.getHourStart();
@@ -105,7 +122,11 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             String meetingHourString = sdfHour.format(meetingHour);
 
             // If meeting append in less than one hour on current day
-            if (meetingDateString.equals(MeetingListActivity.today()) && meetingHourString.equals(MeetingListActivity.currentHour())) {
+            if (meetingDateString.equals(MeetingListActivity.today())
+                    && meetingHourString.equals(MeetingListActivity.currentHour())
+                    || meetingDateString.equals(MeetingListActivity.today())
+                    && meetingHour.before(MeetingListActivity.addHour(1))
+                    && meetingHour.after(MeetingListActivity.addHour(-1))) {
                 meeting.setCircleColor(Color.RED);
             }
             // If meeting append in more than one day
@@ -117,11 +138,14 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
                 meeting.setCircleColor(Color.GRAY);
             }
             // If meeting is between one and three hours
-            else if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.before(MeetingListActivity.addHour(3)) && meetingHour.after(MeetingListActivity.addHour(1))) {
+            else if (meetingDateString.equals(MeetingListActivity.today())
+                    && meetingHour.before(MeetingListActivity.addHour(3))
+                    && meetingHour.after(MeetingListActivity.addHour(1))) {
                 meeting.setCircleColor(Color.parseColor("#FFAC1C"));
             }
             // If meeting is today after 3 hours
-            else if (meetingDateString.equals(MeetingListActivity.today()) && meetingHour.after(MeetingListActivity.addHour(3))) {
+            else if (meetingDateString.equals(MeetingListActivity.today())
+                    && meetingHour.after(MeetingListActivity.addHour(3))) {
                 meeting.setCircleColor(Color.GREEN);
             }
             // If meeting is tomorrow
@@ -129,5 +153,13 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
                 meeting.setCircleColor(Color.CYAN);
             }
         }
+
+        /*public void removeAt(Meeting meeting) {
+            Meeting position = mMeetings.get(getAbsoluteAdapterPosition());
+            mMeetingApiService.deleteMeeting(meeting);
+            //notifyItemRemoved(position);
+            //notifyItemRangeChanged(mMeetings, mMeetings.size());
+        }*/
     }
+
 }

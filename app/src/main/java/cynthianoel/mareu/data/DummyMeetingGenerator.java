@@ -15,8 +15,8 @@ public abstract class DummyMeetingGenerator {
     protected static Calendar calB = getCalB();
     protected static Calendar calC = getCalC();
 
-    private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-            new Meeting("Réunion A", "maxime@lamzone.com"+", "+"alex@lamzone.com", "Peach",calA.getTime(), Calendar.getInstance().getTime(), "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.parseColor("#FF03FBC9")),
+    public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
+            new Meeting("Réunion A", "maxime@lamzone.com"+", "+"alex@lamzone.com", "Peach",calA.getTime(), Calendar.getInstance().getTime(), "Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.GREEN),
             new Meeting("Réunion B", "paul@lamzone.com"+", "+"viviane@lamzone.com", "Mario",calB.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.RED),
             new Meeting("Réunion C", "amandine@lamzone.com"+", "+"luc@lamzone.com", "Luigi",calC.getTime(),Calendar.getInstance().getTime(),"Réunion au sujet de l'application MaRéu.", Calendar.getInstance().getTime(), Color.YELLOW)
             );

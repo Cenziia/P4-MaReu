@@ -33,6 +33,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     private ActivityMeetingListBinding binding;
     private List<Meeting> mMeetings = new ArrayList<>();
     private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+    private List<Meeting> meetings;
+    private MeetingListActivityAdapter mAdapter;
 
     private static SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
     private static SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
@@ -83,6 +85,17 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         inflater.inflate(R.menu.menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    /*
+    /**
+     * remove a item in list
+     * @param position *
+     */
+    /*public void onClickDeleteButton(int position) {
+        mMeetingApiService.deleteMeeting(meetings.get(position));
+        mAdapter.notifyItemRemoved(position);
+        mAdapter.notifyItemRangeChanged(position, meetings.size());
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
