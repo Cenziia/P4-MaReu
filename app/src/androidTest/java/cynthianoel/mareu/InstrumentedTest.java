@@ -12,15 +12,19 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withChild;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 import static cynthianoel.utils.RecyclerViewItemCountAssertion.withItemCount;
 
+import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
@@ -30,6 +34,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
 import org.junit.Before;
@@ -42,6 +47,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import cynthianoel.mareu.di.DI;
+import cynthianoel.mareu.model.MeetingRoom;
 import cynthianoel.mareu.service.MeetingApiService;
 import cynthianoel.mareu.ui.MeetingListActivity;
 import cynthianoel.utils.DeleteViewAction;
@@ -59,6 +65,11 @@ public class InstrumentedTest {
 
     private MeetingListActivity mActivity;
     private MeetingApiService mMeetingApiService;
+
+    // For Filter by date test
+    int year = 2022;
+    int month = 3;
+    int day = 10;
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityRule =
@@ -102,7 +113,7 @@ public class InstrumentedTest {
     public void myMeetingsListMenu_filterAction_shouldFilterByDate() {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Filtrer par date")).perform(click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022, 3, 9));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(year, month, day));
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.meetingListRecyclerView)).check((withItemCount(3)));
     }
@@ -119,34 +130,47 @@ public class InstrumentedTest {
     }
 
     /**
-     *Meeting test created
+     * After some parameters selected, create a new meeting
      */
     @Test
-    public void meetingTest_createdWithSuccess() {
-        //test click on add fab and create activity is displayed
-        onView(withId(R.id.list_meeting_fab_add)).perform(click());
-        onView(withId(R.id.activity_add_meeting_layout)).check(matches(isDisplayed()));
+    public void myMeetingCreatorActivity_shouldCreateANewMeeting() {
 
-        //test populate create meeting and create right back to list activity
-        onView(withId(R.id.ti_ed_topic)).perform(replaceText("Topic test"));
+        // Start activity button click and start of Add activity
+        onView(withId(R.id.startAddMeetingActivity)).perform(click());
+        onView(withId(R.id.add_meeting_activity)).check(matches(isDisplayed()));
 
-        //chek return meeting list
-        onView(withId(R.id.btn_picker_date)).perform(click());
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022,10,12));
+        // Select a date
+        onView(withId(R.id.btn_date_picker)).perform(click());
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2022,12,25));
         onView(withId(android.R.id.button1)).perform(click());
 
-        //input room
-        onView(withId(R.id.ti_ed_room)).perform(click());
-        onData(equalTo("Paris")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
+        // Select a start time
+        onView(withId(R.id.btn_hour_picker_start)).perform(click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(2,10));
+        onView(withId(android.R.id.button1)).perform(click());
 
-        onView(withId(R.id.ti_ed_participants)).perform(typeText("emailtest1@gmail.com"), pressImeActionButton());//press enter
+        // Select a end time
+        onView(withId(R.id.btn_hour_picker_end)).perform(click());
+        onView(withClassName(Matchers.equalTo(TimePicker.class.getName()))).perform(PickerActions.setTime(23,59));
+        onView(withId(android.R.id.button1)).perform(click());
 
+        // Add a subject/title to the meeting
+        onView(withId(R.id.ti_ed_subject)).perform(replaceText("Subject"));
+
+        // Select a room
+        onView(withId(R.id.spinner_rooms_available)).perform(click());
+        onData(anything()).atPosition(1).perform(click());
+
+        // Add a chip participant and press enter
+        onView(withId(R.id.ti_ed_participants)).perform(typeText("karina@gmail.com"), pressImeActionButton());
+
+        // Close keyboard
         closeSoftKeyboard();
 
-        //put button create
-        onView(withId(R.id.button_create_meeting)).perform(click());
+        // Press add button to add this meeting and go back to meeting list
+        onView(withId(R.id.btn_add_meeting)).perform(click());
         //chek meeting is displayed
-        onView(withId(R.id.list_meetings_recycler_view)).check((matches(hasChildCount(2))));
+        onView(withId(R.id.meetingListRecyclerView)).check((matches(hasChildCount(3))));
     }
 }
 
