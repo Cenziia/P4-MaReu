@@ -1,15 +1,25 @@
 package cynthianoel.mareu;
 
+
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.runners.MethodSorters;
 
-import static org.junit.Assert.*;
 
 import android.graphics.Color;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import junit.framework.TestCase;
 
 import java.time.Year;
 import java.util.ArrayList;
@@ -29,10 +39,10 @@ import cynthianoel.mareu.ui.MeetingListActivityAdapter;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(JUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UnitTest {
 
-    MeetingApiService mMeetingApiService;
-    RecyclerView.Adapter mAdapter;
+    private MeetingApiService mMeetingApiService;
 
     @Before
     public void setup() {
@@ -43,17 +53,43 @@ public class UnitTest {
     * Show meeting list
      */
     @Test
-    public void getMeetingsWithSuccess() {
+    public void testA_getMeetingsWithSuccess() {
         List<Meeting> meetings = mMeetingApiService.getMeetings();
         List<Meeting> expectedMeetings = DummyMeetingGenerator.DUMMY_MEETINGS;
         assertEquals(meetings, expectedMeetings);
     }
 
     /**
+     * Filter by room
+     */
+    @Test
+    public void testB_getMeetingByRoom_withSuccess() {
+        List<Meeting> meetingsByRoom1 = mMeetingApiService.getMeetingFilteredByRoom("Mario");
+        System.out.println("MEETING FILTER 1 => " + meetingsByRoom1 + " <=");
+        assertFalse(meetingsByRoom1.isEmpty());
+        List<Meeting> meetingsByRoom2 = mMeetingApiService.getMeetingFilteredByRoom("");
+        System.out.println("MEETING FILTER 2 => " + meetingsByRoom2 + " <=");
+        assertTrue(meetingsByRoom2.isEmpty());
+    }
+
+    /**
+     * Filter by date
+     */
+    @Test
+    public void testC_getMeetingByDate_withSuccess() {
+        List<Meeting> meetingsByDate1 = mMeetingApiService.getMeetingsFilteredByDate(Calendar.getInstance().getTime());
+        System.out.println("MEETING FILTER 1 => " + meetingsByDate1 + " <=");
+        assertFalse((meetingsByDate1.isEmpty()));
+        List<Meeting> meetingsByDate2 = mMeetingApiService.getMeetingsFilteredByDate(MeetingListActivity.addDay(40));
+        System.out.println("MEETING FILTER 2 => " + meetingsByDate2 + " <=");
+        assertTrue((meetingsByDate2.isEmpty()));
+    }
+
+    /**
      * Delete a meeting
      */
     @Test
-    public void deleteNeighbourWithSuccess() {
+    public void testD_deleteNeighbourWithSuccess() {
         //int meetingToDelete = mAdapter.getItemViewType(1);
         Meeting meetingToDelete = mMeetingApiService.getMeetings().get(0);
         System.out.println("MEETING A SUPPRIMER"+meetingToDelete);
@@ -67,37 +103,10 @@ public class UnitTest {
      * Create a meeting
      */
     @Test
-    public void createMeetingWithSuccess() {
+    public void testE_createMeetingWithSuccess() {
         Meeting meetingToCreate = new Meeting("Réunion E", "test1@lamzone.com"+", "+"test2@lamzone.com", "Zelda",Calendar.getInstance().getTime(), Calendar.getInstance().getTime(), "Description", Calendar.getInstance().getTime(), Color.BLACK);
         mMeetingApiService.addMeeting(meetingToCreate);
         System.out.println(mMeetingApiService.getMeetings());
         assertTrue(mMeetingApiService.getMeetings().contains(meetingToCreate));
-    }
-
-
-    /**
-     * Filter by room
-     */
-    @Test
-    public void getMeetingByRoom_withSuccess() {
-        ArrayList<Meeting> meetingsByRoom1 = mMeetingApiService.getMeetingFilteredByRoom("Peach");
-        System.out.println("MEETING FILTER 1 => " + meetingsByRoom1 + " <=");
-        assertFalse(meetingsByRoom1.isEmpty());
-        ArrayList<Meeting> meetingsByRoom2 = mMeetingApiService.getMeetingFilteredByRoom("");
-        System.out.println("MEETING FILTER 2 => " + meetingsByRoom2 + " <=");
-        assertTrue(meetingsByRoom2.isEmpty());
-    }
-
-    /**
-     * Filter by date
-     */
-    @Test
-    public void getMeetingByDate_withSuccess() {
-        ArrayList<Meeting> meetingsByDate1 = mMeetingApiService.getMeetingsFilteredByDate(Calendar.getInstance().getTime());
-        System.out.println("MEETING FILTER 1 => " + meetingsByDate1 + " <=");
-        assertFalse((meetingsByDate1.isEmpty()));
-        ArrayList<Meeting> meetingsByDate2 = mMeetingApiService.getMeetingsFilteredByDate(MeetingListActivity.addDay(40));
-        System.out.println("MEETING FILTER 2 => " + meetingsByDate2 + " <=");
-        assertTrue((meetingsByDate2.isEmpty()));
     }
 }

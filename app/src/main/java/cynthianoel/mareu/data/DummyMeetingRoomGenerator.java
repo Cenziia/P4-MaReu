@@ -14,7 +14,7 @@ public abstract class DummyMeetingRoomGenerator {
             new MeetingRoom(0,"Skype",true),
             new MeetingRoom(1, "Peach", true),
             new MeetingRoom(2,"Mario", true),
-            new MeetingRoom(3, "Luigi", false),
+            new MeetingRoom(3, "Luigi", true),
             new MeetingRoom(4, "Yoshi", false),
             new MeetingRoom(5, "Toad", true),
             new MeetingRoom(6, "Zelda", true),

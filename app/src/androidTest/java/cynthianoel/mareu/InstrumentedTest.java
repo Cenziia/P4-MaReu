@@ -37,10 +37,13 @@ import androidx.test.rule.ActivityTestRule;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.time.Year;
 import java.util.Calendar;
@@ -58,10 +61,11 @@ import cynthianoel.utils.DeleteViewAction;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class InstrumentedTest {
 
     // This is fixed
-    private static int ITEMS_COUNT = 3;
+    private static final int ITEMS_COUNT = 3;
 
     private MeetingListActivity mActivity;
     private MeetingApiService mMeetingApiService;
@@ -69,7 +73,7 @@ public class InstrumentedTest {
     // For Filter by date test
     int year = 2022;
     int month = 3;
-    int day = 10;
+    int day = 14;
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityRule =
@@ -86,31 +90,17 @@ public class InstrumentedTest {
      * We ensure that our recyclerview is displaying at least on item
      */
     @Test
-    public void myMeetingsList_shouldNotBeEmpty() {
+    public void A_myMeetingsList_shouldNotBeEmpty() {
         // First scroll to the position that needs to be matched and click on it.
         onView(withId(R.id.meetingListRecyclerView))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
     /**
-     * When we delete an item, the item is no more shown
-     */
-    @Test
-    public void myMeetingsList_deleteAction_shouldRemoveItem() {
-        // Given : We remove the element at position 1
-        onView(withId(R.id.meetingListRecyclerView)).check(withItemCount(ITEMS_COUNT));
-        // When perform a click on a delete icon
-       onView(withId(R.id.meetingListRecyclerView))
-               .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
-        // Then : the number of element is 2
-        onView(withId(R.id.meetingListRecyclerView)).check(withItemCount(ITEMS_COUNT - 1));
-    }
-
-    /**
      * On the menu, when we select to filter by date, items with this date are shown if there's one or more
      */
     @Test
-    public void myMeetingsListMenu_filterAction_shouldFilterByDate() {
+    public void B_myMeetingsListMenu_filterAction_shouldFilterByDate() {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
         onView(withText("Filtrer par date")).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(year, month, day));
@@ -119,21 +109,25 @@ public class InstrumentedTest {
     }
 
     /**
-     * On the menu, when we select to filter by room, items with this room are shown if there's one or more
+     * When we delete an item, the item is no more shown
      */
     @Test
-    public void myMeetingsListMenu_filterAction_shouldFilterByRoom() {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        onView(withText("Filtrer par salle")).perform(click());
-        onView(withText("Peach")).perform(click());
-        onView(withId(R.id.meetingListRecyclerView)).check((withItemCount(1)));
+    public void C_myMeetingsList_deleteAction_shouldRemoveItem() {
+
+        // Given : We remove the element at position 1
+        onView(withId(R.id.meetingListRecyclerView)).check(withItemCount(ITEMS_COUNT));
+        // When perform a click on a delete icon
+       onView(withId(R.id.meetingListRecyclerView))
+               .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
+        // Then : the number of element is 2
+        onView(withId(R.id.meetingListRecyclerView)).check(withItemCount(2));
     }
 
     /**
      * After some parameters selected, create a new meeting
      */
     @Test
-    public void myMeetingCreatorActivity_shouldCreateANewMeeting() {
+    public void D_myMeetingCreatorActivity_shouldCreateANewMeeting() {
 
         // Start activity button click and start of Add activity
         onView(withId(R.id.startAddMeetingActivity)).perform(click());
@@ -159,7 +153,7 @@ public class InstrumentedTest {
 
         // Select a room
         onView(withId(R.id.spinner_rooms_available)).perform(click());
-        onData(anything()).atPosition(1).perform(click());
+        onData(anything()).atPosition(3).perform(click());
 
         // Add a chip participant and press enter
         onView(withId(R.id.ti_ed_participants)).perform(typeText("karina@gmail.com"), pressImeActionButton());
@@ -171,6 +165,18 @@ public class InstrumentedTest {
         onView(withId(R.id.btn_add_meeting)).perform(click());
         //chek meeting is displayed
         onView(withId(R.id.meetingListRecyclerView)).check((matches(hasChildCount(3))));
+    }
+
+    /**
+     * On the menu, when we select to filter by room, items with this room are shown if there's one or more
+     */
+    @Test
+    public void E_myMeetingsListMenu_filterAction_shouldFilterByRoom() throws InterruptedException {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
+        onView(withText("Filtrer par salle")).perform(click());
+        onView(withText("Luigi")).perform(click());
+        Thread.sleep(3000);
+        onView(withId(R.id.meetingListRecyclerView)).check((withItemCount(2)));
     }
 }
 

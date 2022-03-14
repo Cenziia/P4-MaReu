@@ -79,6 +79,13 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.meetingListRecyclerView.setAdapter(meetingListActivityAdapter);
     }
 
+    /*@Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        Menu menuIcon = (Menu) menu.findItem(R.id.menu_toolbar);
+        menuIcon.setIcon(R.drawable.ic_baseline_filter_list_24);
+        return super.onPrepareOptionsMenu(menu);
+    }*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
