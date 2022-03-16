@@ -30,14 +30,38 @@ import cynthianoel.mareu.utils.DatePickerFragment;
 
 public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private ActivityMeetingListBinding binding;
-    private List<Meeting> mMeetings = new ArrayList<>();
-    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
-    private List<Meeting> meetings;
-    private MeetingListActivityAdapter mAdapter;
-
     private static SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
     private static SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
+    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+    private ActivityMeetingListBinding binding;
+    private List<Meeting> mMeetings = new ArrayList<>();
+
+    public static Date addDay(int days) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, days);
+        return cal.getTime();
+    }
+
+    public static Date addHour(int hours) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.HOUR_OF_DAY, hours);
+        return cal.getTime();
+    }
+
+    public static String today() {
+        String cal1 = sdfDate.format(addDay(0));
+        return cal1;
+    }
+
+    public static String tomorrow() {
+        String cal1 = sdfDate.format(addDay(1));
+        return cal1;
+    }
+
+    public static String currentHour() {
+        String hour1 = sdfHour.format(addHour(0));
+        return hour1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +75,6 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     protected void onStart() {
         super.onStart();
     }
-
 
     @Override
     protected void onStop() {
@@ -79,13 +102,6 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.meetingListRecyclerView.setAdapter(meetingListActivityAdapter);
     }
 
-    /*@Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        Menu menuIcon = (Menu) menu.findItem(R.id.menu_toolbar);
-        menuIcon.setIcon(R.drawable.ic_baseline_filter_list_24);
-        return super.onPrepareOptionsMenu(menu);
-    }*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -93,20 +109,9 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         return super.onCreateOptionsMenu(menu);
     }
 
-    /*
-    /**
-     * remove a item in list
-     * @param position *
-     */
-    /*public void onClickDeleteButton(int position) {
-        mMeetingApiService.deleteMeeting(meetings.get(position));
-        mAdapter.notifyItemRemoved(position);
-        mAdapter.notifyItemRangeChanged(position, meetings.size());
-    }*/
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case (R.id.dateFilter):
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getSupportFragmentManager(), "datePicker");
@@ -123,7 +128,8 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         }
     }
 
-    private void initData() {;
+    private void initData() {
+        ;
         mMeetings = new ArrayList<>(mMeetingApiService.getMeetings());
     }
 
@@ -145,33 +151,6 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         cal.set(year, month, dayOfMonth);
         mMeetings = mMeetingApiService.getMeetingsFilteredByDate(cal.getTime());
         initRecyclerView();
-    }
-
-    public static Date addDay(int days) {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, days);
-        return cal.getTime();
-    }
-
-    public static Date addHour(int hours) {
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.HOUR_OF_DAY, hours);
-        return cal.getTime();
-    }
-
-    public static String today() {
-        String cal1 = sdfDate.format(addDay(0));
-        return cal1;
-    }
-
-    public static String tomorrow() {
-        String cal1 = sdfDate.format(addDay(1));
-        return cal1;
-    }
-
-    public static String currentHour() {
-        String hour1 = sdfHour.format(addHour(0));
-        return hour1;
     }
 
 }

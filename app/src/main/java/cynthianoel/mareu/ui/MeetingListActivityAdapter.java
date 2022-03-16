@@ -12,14 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
 import cynthianoel.mareu.R;
-import cynthianoel.mareu.databinding.ItemMeetingBinding;
 import cynthianoel.mareu.di.DI;
 import cynthianoel.mareu.model.Meeting;
 import cynthianoel.mareu.service.MeetingApiService;
@@ -51,8 +49,6 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             @Override
             public void onClick(View v) {
                 meetingApiService.deleteMeeting(meeting);
-
-               //mMeetings.remove(holder.getAbsoluteAdapterPosition());
                notifyItemRemoved(holder.getAbsoluteAdapterPosition());
                notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
             }
@@ -71,9 +67,8 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         return mMeetings.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder /*implements View.OnClickListener*/ {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        //private MeetingApiService mMeetingApiService;
         protected final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
 
         private final TextView mSubject;
@@ -91,15 +86,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             mEmails = itemView.findViewById(R.id.emailsTxt);
             mDeleteButton = itemView.findViewById(R.id.deleteButton);
             mImageView = itemView.findViewById(R.id.circleImg);
-
-            /*mDeleteButton.setOnClickListener(this);*/
         }
-
-        /*public void onClick(View v) {
-            if(v.equals(mDeleteButton)) {
-                removeAt(mMeetings.get(getAbsoluteAdapterPosition()));
-            }
-        }*/
 
         public void displayMeeting(Meeting meeting){
             Date hourDate = meeting.getHourStart();

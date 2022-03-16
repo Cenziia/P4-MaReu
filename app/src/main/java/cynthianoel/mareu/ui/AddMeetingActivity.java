@@ -33,17 +33,13 @@ import cynthianoel.mareu.service.MeetingApiService;
 import cynthianoel.mareu.utils.TimePickerFragment;
 
 public class AddMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
-    ActivityAddMeetingBinding binding;
-    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
-
-    private Spinner spinnerMeetingRooms;
-
-    private StringBuilder participants;
-
-    String callback = "";
-
-    private Calendar mCalDate;
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+    private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
+    ActivityAddMeetingBinding binding;
+    String callback = "";
+    private Spinner spinnerMeetingRooms;
+    private StringBuilder participants;
+    private Calendar mCalDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

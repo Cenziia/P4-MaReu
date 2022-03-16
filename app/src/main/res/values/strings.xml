@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaRéu_v5</string>
+    <string name="app_name">MaRéu</string>
     <string name="add">Ajouter</string>
     <string name="meeting_circle">meeting circle</string>
     <string name="delete_button">delete button</string>

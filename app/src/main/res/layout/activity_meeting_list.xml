@@ -6,19 +6,23 @@
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/meetingListRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/meetingListRecyclerView"
-        tools:listitem="@layout/item_meeting"/>
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:listitem="@layout/item_meeting" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startAddMeetingActivity"
-        android:src="@drawable/ic_baseline_add_24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:contentDescription="@string/add"
+        android:src="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

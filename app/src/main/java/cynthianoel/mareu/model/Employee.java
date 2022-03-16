@@ -11,21 +11,29 @@ import java.util.Objects;
 
 public class Employee implements Parcelable {
 
+    public static final Creator<Employee> CREATOR = new Creator<Employee>() {
+        @Override
+        public Employee createFromParcel(Parcel in) {
+            return new Employee(in);
+        }
+
+        @Override
+        public Employee[] newArray(int size) {
+            return new Employee[size];
+        }
+    };
     /**
      * Identifier
      */
     private long id;
-
     /**
      * Full name
      */
     private String name;
-
     /**
      * Email address
      */
     private String email;
-
     /**
      * Available
      */
@@ -52,18 +60,6 @@ public class Employee implements Parcelable {
         email = in.readString();
         available = in.readByte() != 0;
     }
-
-    public static final Creator<Employee> CREATOR = new Creator<Employee>() {
-        @Override
-        public Employee createFromParcel(Parcel in) {
-            return new Employee(in);
-        }
-
-        @Override
-        public Employee[] newArray(int size) {
-            return new Employee[size];
-        }
-    };
 
     public long getId() {
         return id;

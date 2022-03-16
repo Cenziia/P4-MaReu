@@ -12,32 +12,24 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withChild;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.anything;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import static cynthianoel.utils.RecyclerViewItemCountAssertion.withItemCount;
 
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.espresso.matcher.RootMatchers;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.hamcrest.core.IsNull;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -45,12 +37,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import java.time.Year;
-import java.util.Calendar;
-import java.util.Date;
-
 import cynthianoel.mareu.di.DI;
-import cynthianoel.mareu.model.MeetingRoom;
 import cynthianoel.mareu.service.MeetingApiService;
 import cynthianoel.mareu.ui.MeetingListActivity;
 import cynthianoel.utils.DeleteViewAction;
@@ -66,18 +53,15 @@ public class InstrumentedTest {
 
     // This is fixed
     private static final int ITEMS_COUNT = 3;
-
-    private MeetingListActivity mActivity;
-    private MeetingApiService mMeetingApiService;
-
-    // For Filter by date test
-    int year = 2022;
-    int month = 3;
-    int day = 14;
-
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityRule =
             new ActivityTestRule(MeetingListActivity.class, false, true);
+    // For Filter by date test
+    int year = 2022;
+    int month = 3;
+    int day = 16;
+    private MeetingListActivity mActivity;
+    private MeetingApiService mMeetingApiService;
 
     @Before
     public void setUp() {

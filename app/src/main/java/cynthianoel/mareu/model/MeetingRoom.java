@@ -11,16 +11,25 @@ import java.util.Objects;
 
 public class MeetingRoom implements Parcelable {
 
+    public static final Creator<MeetingRoom> CREATOR = new Creator<MeetingRoom>() {
+        @Override
+        public MeetingRoom createFromParcel(Parcel in) {
+            return new MeetingRoom(in);
+        }
+
+        @Override
+        public MeetingRoom[] newArray(int size) {
+            return new MeetingRoom[size];
+        }
+    };
     /**
      * Identifier
      */
     private long id;
-
     /**
      * Full name
      */
     private String name;
-
     /**
      * Available
      */
@@ -44,18 +53,6 @@ public class MeetingRoom implements Parcelable {
         name = in.readString();
         available = in.readByte() != 0;
     }
-
-    public static final Creator<MeetingRoom> CREATOR = new Creator<MeetingRoom>() {
-        @Override
-        public MeetingRoom createFromParcel(Parcel in) {
-            return new MeetingRoom(in);
-        }
-
-        @Override
-        public MeetingRoom[] newArray(int size) {
-            return new MeetingRoom[size];
-        }
-    };
 
     public long getId() {
         return id;

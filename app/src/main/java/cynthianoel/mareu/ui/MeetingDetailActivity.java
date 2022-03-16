@@ -18,12 +18,11 @@ import cynthianoel.mareu.model.Meeting;
 
 public class MeetingDetailActivity extends AppCompatActivity {
 
-    ActivityMeetingDetailBinding binding;
-    private static final String MEETING_STRING = "meeting";
-    private static final String TAG = MeetingDetailActivity.class.getSimpleName();
-
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
     protected static final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
+    private static final String MEETING_STRING = "meeting";
+    private static final String TAG = MeetingDetailActivity.class.getSimpleName();
+    ActivityMeetingDetailBinding binding;
 
     public static Intent newInstance(final Context context, final Meeting meeting) {
         Log.d(TAG, "> newInstance");

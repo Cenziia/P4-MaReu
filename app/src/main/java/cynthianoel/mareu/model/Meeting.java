@@ -10,10 +10,22 @@ import java.util.Date;
  */
 
 public class Meeting implements Parcelable {
+    public static final Creator<Meeting> CREATOR = new Creator<Meeting>() {
+        @Override
+        public Meeting createFromParcel(Parcel in) {
+            return new Meeting(in);
+        }
+
+        @Override
+        public Meeting[] newArray(int size) {
+            return new Meeting[size];
+        }
+    };
     private String subject, participants, meetingRoom, description;
     private long date;
     private long hourStart, hourEnd;
     private int circleColor;
+
 
     /**
      * Constructor
@@ -39,6 +51,16 @@ public class Meeting implements Parcelable {
         this.circleColor = circleColor;
     }
 
+    protected Meeting(Parcel in) {
+        subject = in.readString();
+        participants = in.readString();
+        meetingRoom = in.readString();
+        description = in.readString();
+        hourStart = in.readLong();
+        hourEnd = in.readLong();
+        date = in.readLong();
+        circleColor = in.readInt();
+    }
 
     public String getSubject() {
         return subject;
@@ -100,7 +122,6 @@ public class Meeting implements Parcelable {
 
     public void setCircleColor(int circleColor) { this.circleColor = circleColor; }
 
-
     @Override
     public String toString() {
         return "Meeting{" +
@@ -129,27 +150,4 @@ public class Meeting implements Parcelable {
         dest.writeLong(hourEnd);
         dest.writeLong(date);
     }
-
-    protected Meeting(Parcel in) {
-        subject = in.readString();
-        participants = in.readString();
-        meetingRoom = in.readString();
-        description = in.readString();
-        hourStart = in.readLong();
-        hourEnd = in.readLong();
-        date = in.readLong();
-        circleColor = in.readInt();
-    }
-
-    public static final Creator<Meeting> CREATOR = new Creator<Meeting>() {
-        @Override
-        public Meeting createFromParcel(Parcel in) {
-            return new Meeting(in);
-        }
-
-        @Override
-        public Meeting[] newArray(int size) {
-            return new Meeting[size];
-        }
-    };
 }

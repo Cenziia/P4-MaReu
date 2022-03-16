@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
 
     <ImageView
         android:id="@+id/circleImg"
-        android:contentDescription="@string/meeting_circle"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_baseline_circle_24"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/meeting_circle"
+        android:src="@drawable/ic_baseline_circle_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,15 +22,15 @@
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/delete_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:padding="8dp"
-        android:tint="@color/dark_gray"
         android:backgroundTint="@color/transparent"
-        android:src="@drawable/ic_baseline_delete_24"/>
+        android:contentDescription="@string/delete_button"
+        android:padding="8dp"
+        android:src="@drawable/ic_baseline_delete_24"
+        android:tint="@color/dark_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 
     <LinearLayout
@@ -71,13 +71,13 @@
 
         <TextView
             android:id="@+id/emailsTxt"
-            app:layout_constraintTop_toBottomOf="@id/meetingInfo"
-            app:layout_constraintStart_toEndOf="@id/circleImg"
-            android:singleLine="true"
-            android:maxWidth="280dp"
-            android:layout_marginStart="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:maxWidth="280dp"
+            android:singleLine="true"
+            app:layout_constraintStart_toEndOf="@id/circleImg"
+            app:layout_constraintTop_toBottomOf="@id/meetingInfo"
             tools:text="@tools:sample/lorem[10]"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
