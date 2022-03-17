@@ -4,14 +4,19 @@
 
 ## Introduction
 
-Entrevoisins est une application qui permet à des personnes d’un même quartier de se rendre des petits services : garde d’animaux, petit bricolage, troc d’objets, cours particuliers, de nombreuses options s’offrent aux utilisateurs !
+MaRéu est une application de gestion de réunion qui permet :
+- d'afficher la liste des réunions, avec couleur selon la date ou l'heure
+- les filtrer selon la date ou la salle
+- supprimer une réunion
+- créer une réunion
+- afficher les détails de la réunion
 
 
 ## Télécharger ou cloner le code de l'application
 
 Vous pouvez cloner directement le projet via votre terminal avec cette commande :
 
-```` git clone https://github.com/Cenziia/P4_MaReu ````
+```` git clone https://github.com/Cenziia/P4-MaReu ````
 
 Sinon, vous pouvez le télécharger sur Github :
 
