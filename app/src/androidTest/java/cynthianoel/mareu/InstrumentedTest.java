@@ -59,7 +59,7 @@ public class InstrumentedTest {
     // For Filter by date test
     int year = 2022;
     int month = 3;
-    int day = 16;
+    int day = 21;
     private MeetingListActivity mActivity;
     private MeetingApiService mMeetingApiService;
 

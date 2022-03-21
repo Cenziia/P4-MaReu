@@ -78,7 +78,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        MeetingRoom meetingRoom = (MeetingRoom) adapter.getItem(position);
+                MeetingRoom meetingRoom = (MeetingRoom) adapter.getItem(position);
                 binding.roomsAvailableTxt.setText("Salle sélectionnée : ");
             }
 
@@ -95,32 +95,33 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
-        private void dateTimeListeners() {
-            binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    DatePickerDialog datePicker = new DatePickerDialog(AddMeetingActivity.this, AddMeetingActivity.this, 2022, 1, 2);
-                    datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                    datePicker.show();
-                }
-            });
+    private void dateTimeListeners() {
+        binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePicker = new DatePickerDialog(AddMeetingActivity.this, AddMeetingActivity.this, 2022, 1, 2);
+                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePicker.show();
+            }
+        });
         binding.btnHourPickerStart.setOnClickListener(view -> {
             callback = "for_start_time";
             DialogFragment timePicker = new TimePickerFragment();
             timePicker.show(getSupportFragmentManager(), "timePicker");
         });
-            binding.btnHourPickerEnd.setOnClickListener(view -> {
-                callback = "for_end_time";
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "timePicker");
-            });
+        binding.btnHourPickerEnd.setOnClickListener(view -> {
+            callback = "for_end_time";
+            DialogFragment timePicker = new TimePickerFragment();
+            timePicker.show(getSupportFragmentManager(), "timePicker");
+        });
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         datePicker.setMinDate(System.currentTimeMillis() - 1000);
         mCalDate = Calendar.getInstance();
-        mCalDate.set(year, month, dayOfMonth);;
+        mCalDate.set(year, month, dayOfMonth);
+        ;
         Date date1 = mCalDate.getTime();
         String date = dateFormat.format(date1);
         binding.btnDatePicker.setText(String.format("%s%s", "Date : ", date));
@@ -128,14 +129,13 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        if (callback.equalsIgnoreCase("for_start_time") ) {
+        if (callback.equalsIgnoreCase("for_start_time")) {
             mCalDate.set(Calendar.HOUR_OF_DAY, hour);
             mCalDate.set(Calendar.MINUTE, minute);
             mCalDate.set(Calendar.SECOND, 0);
-            binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ",getString(R.string.date_time, hour, minute)));
-        }
-        else if (callback.equalsIgnoreCase("for_end_time")) {
-            binding.btnHourPickerEnd.setText(String.format("%s%s", "Fin : ",getString(R.string.date_time, hour, minute)));
+            binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ", getString(R.string.date_time, hour, minute)));
+        } else if (callback.equalsIgnoreCase("for_end_time")) {
+            binding.btnHourPickerEnd.setText(String.format("%s%s", "Fin : ", getString(R.string.date_time, hour, minute)));
         }
         callback = "";
     }
@@ -171,12 +171,49 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void onSubmit() {
+        String subject = binding.tiEdSubject.getEditableText().toString();
+        String meetingRoom = spinnerMeetingRooms.getSelectedItem().toString();
+        String description = "description";
+
+        checkErrors();
+
+        Date mDate = mCalDate.getTime();
+        Date mTime = mCalDate.getTime();
+
+        if (checkErrors()) {
+            mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, mTime, mTime, description, mDate, R.drawable.ic_baseline_circle_24));
+            Toast.makeText(this, "Réunion créée !", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+    private boolean checkErrors() {
         String date = binding.btnDatePicker.getText().toString();
         String hourStart = binding.btnHourPickerStart.getText().toString();
         String hourEnd = binding.btnHourPickerEnd.getText().toString();
         String subject = binding.tiEdSubject.getEditableText().toString();
         String meetingRoom = spinnerMeetingRooms.getSelectedItem().toString();
-        String description = "description";
+
+        if (date.isEmpty()) {
+            binding.btnDatePicker.setError("Please choose a date");
+            return false;
+        }
+        if (hourStart.isEmpty()) {
+            binding.btnHourPickerStart.setError("Please choose a start time");
+            return false;
+        }
+        if (hourEnd.isEmpty()) {
+            binding.btnHourPickerEnd.setError("Please choose a end time");
+            return false;
+        }
+        if (subject.isEmpty()) {
+            binding.tiEdSubject.setError("Please type a subject");
+            return false;
+        }
+        if (meetingRoom.isEmpty()) {
+            binding.roomsAvailableTxt.setError("Please choose a room");
+            return false;
+        }
 
         participants = new StringBuilder();
         for (int i = 0; i < binding.chipGroupParticipants.getChildCount(); i++) {
@@ -185,29 +222,13 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             participants.append(", ");
         }
 
-        if (date.isEmpty()) {
-            binding.btnDatePicker.setError("Please choose a date");
+        if (binding.chipGroupParticipants.getChildCount() < 1) {
+            binding.tiEdParticipants.setError("Please type and valid an email address");
+            return false;
         }
-        if (hourStart.isEmpty()) {
-            binding.btnHourPickerStart.setError("Please choose a start time");
+        else {
+            return true;
         }
-        if (hourEnd.isEmpty()) {
-            binding.btnHourPickerEnd.setError("Please choose a end time");
-        }
-        if (subject.isEmpty()) {
-            binding.tiEdSubject.setError("Please type a subject");
-        }
-        if (meetingRoom.isEmpty()) {
-            binding.roomsAvailableTxt.setError("Please choose a room");
-        }
-
-        Date mDate = mCalDate.getTime();
-        Date mTime = mCalDate.getTime();
-
-        mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, mTime, mTime, description, mDate, R.drawable.ic_baseline_circle_24));
-        Toast.makeText(this, "Réunion créée !", Toast.LENGTH_SHORT).show();
-        finish();
-
     }
 }
 
