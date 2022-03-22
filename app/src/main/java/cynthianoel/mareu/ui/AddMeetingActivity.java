@@ -79,12 +79,12 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 MeetingRoom meetingRoom = (MeetingRoom) adapter.getItem(position);
-                binding.roomsAvailableTxt.setText("Salle sélectionnée : ");
+                binding.roomsAvailableTxt.setText(R.string.room_selected);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                binding.roomsAvailableTxt.setText("Sélectionner une salle");
+                binding.roomsAvailableTxt.setText(R.string.select_a_room);
             }
         });
     }
@@ -121,7 +121,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         datePicker.setMinDate(System.currentTimeMillis() - 1000);
         mCalDate = Calendar.getInstance();
         mCalDate.set(year, month, dayOfMonth);
-        ;
         Date date1 = mCalDate.getTime();
         String date = dateFormat.format(date1);
         binding.btnDatePicker.setText(String.format("%s%s", "Date : ", date));

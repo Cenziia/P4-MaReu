@@ -3,6 +3,8 @@ package cynthianoel.mareu.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 /**
@@ -38,9 +40,9 @@ public class MeetingRoom implements Parcelable {
     /**
      * Constructor
      *
-     * @param id
-     * @param name
-     * @param available
+     * @param id long
+     * @param name String
+     * @param available Boolean
      */
     public MeetingRoom(long id, String name, boolean available) {
         this.id = id;
@@ -92,6 +94,7 @@ public class MeetingRoom implements Parcelable {
         return Objects.hash(id);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return this.getName();

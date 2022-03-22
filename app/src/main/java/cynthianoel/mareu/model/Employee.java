@@ -3,10 +3,12 @@ package cynthianoel.mareu.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
 /**
- * Model object representing a Meeting Room
+ * Model object representing a Employee for later
  */
 
 public class Employee implements Parcelable {
@@ -42,10 +44,10 @@ public class Employee implements Parcelable {
     /**
      * Constructor
      *
-     * @param id
-     * @param name
-     * @param email
-     * @param available
+     * @param id long
+     * @param name String
+     * @param email String
+     * @param available Boolean
      */
     public Employee(long id, String name, String email, boolean available) {
         this.id = id;
@@ -106,6 +108,7 @@ public class Employee implements Parcelable {
         return Objects.hash(id);
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Meeting{" +

@@ -6,6 +6,7 @@ import java.util.List;
 
 import cynthianoel.mareu.model.Employee;
 
+// Class that will be used later for an employees dynamic list
 public abstract class DummyEmployeeGenerator {
     public static List<Employee> DUMMY_EMPLOYEES = Arrays.asList(
             new Employee(1, "Francis"+" R","francis"+"@lamzone.com", true),

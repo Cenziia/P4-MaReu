@@ -3,10 +3,12 @@ package cynthianoel.mareu.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 import java.util.Date;
 
 /**
- * Model object representing a Meeting Room
+ * Model object representing a Meeting
  */
 
 public class Meeting implements Parcelable {
@@ -30,14 +32,14 @@ public class Meeting implements Parcelable {
     /**
      * Constructor
      *
-     * @param subject
-     * @param participants
-     * @param meetingRoom
-     * @param hourStart
-     * @param hourEnd
-     * @param description
-     * @param date
-     * @param circleColor
+     * @param subject String
+     * @param participants String
+     * @param meetingRoom String
+     * @param hourStart Date
+     * @param hourEnd Date
+     * @param description String
+     * @param date Date
+     * @param circleColor int
      */
     public Meeting(String subject, String participants, String meetingRoom, Date hourStart, Date hourEnd, String description, Date date, int circleColor) {
 
@@ -122,6 +124,7 @@ public class Meeting implements Parcelable {
 
     public void setCircleColor(int circleColor) { this.circleColor = circleColor; }
 
+    @NonNull
     @Override
     public String toString() {
         return "Meeting{" +

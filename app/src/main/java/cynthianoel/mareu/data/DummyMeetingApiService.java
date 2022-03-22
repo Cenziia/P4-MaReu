@@ -17,23 +17,32 @@ public class DummyMeetingApiService implements MeetingApiService {
     private final List<Meeting> meetings = DummyMeetingGenerator.generateMeetings();
 
     /**
-     * {@inheritDoc}
+     * Get meetings' rooms' list
      */
     @Override
     public List<MeetingRoom> getMeetingRooms() {
         return meetingRooms;
     }
 
+    /**
+     * Get employees' list
+     */
     @Override
     public List<Employee> getEmployees() {
         return employees;
     }
 
+    /**
+     * Get meetings' list
+     */
     @Override
     public List<Meeting> getMeetings() {
         return meetings;
     }
 
+    /**
+     * Get a list of meetings filtered by date
+     */
     @Override
     public ArrayList<Meeting> getMeetingsFilteredByDate(Date date) {
         ArrayList<Meeting> meetingsByDate = new ArrayList<>();
@@ -50,6 +59,9 @@ public class DummyMeetingApiService implements MeetingApiService {
         return meetingsByDate;
     }
 
+    /**
+     * Get a list of meetings filtered by room
+     */
     @Override
     public ArrayList<Meeting> getMeetingFilteredByRoom(String room) {
         ArrayList<Meeting> meetingsByRoom = new ArrayList<>();
@@ -61,6 +73,9 @@ public class DummyMeetingApiService implements MeetingApiService {
         return meetingsByRoom;
     }
 
+    /**
+     * Get a dynamic list of meetings' rooms
+     */
     @Override
     public List<MeetingRoom> getAvailableMeetingRoomsList() {
         ArrayList<MeetingRoom> meetingsAvailable = new ArrayList<>();
@@ -73,11 +88,17 @@ public class DummyMeetingApiService implements MeetingApiService {
                 return meetingsAvailable;
         }
 
+    /**
+     * Add a meeting
+     */
     @Override
     public void addMeeting(Meeting meeting) {
         meetings.add(meeting);
     }
 
+    /**
+     * Delete a meeting
+     */
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetings.remove(meeting);

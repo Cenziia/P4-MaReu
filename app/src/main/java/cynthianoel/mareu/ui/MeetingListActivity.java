@@ -30,8 +30,8 @@ import cynthianoel.mareu.utils.DatePickerFragment;
 
 public class MeetingListActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    private static SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
-    private static SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
+    private static final SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
+    private static final SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
     private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
     private ActivityMeetingListBinding binding;
     private List<Meeting> mMeetings = new ArrayList<>();
@@ -129,7 +129,6 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     }
 
     private void initData() {
-        ;
         mMeetings = new ArrayList<>(mMeetingApiService.getMeetings());
     }
 

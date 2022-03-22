@@ -67,7 +67,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         return mMeetings.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         protected final SimpleDateFormat hourFormat = new SimpleDateFormat("HH'h'mm", Locale.FRANCE);
 
@@ -140,13 +140,6 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
                 meeting.setCircleColor(Color.CYAN);
             }
         }
-
-        /*public void removeAt(Meeting meeting) {
-            Meeting position = mMeetings.get(getAbsoluteAdapterPosition());
-            mMeetingApiService.deleteMeeting(meeting);
-            //notifyItemRemoved(position);
-            //notifyItemRangeChanged(mMeetings, mMeetings.size());
-        }*/
     }
 
 }

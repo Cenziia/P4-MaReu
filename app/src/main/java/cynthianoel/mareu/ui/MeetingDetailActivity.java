@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import cynthianoel.mareu.databinding.ActivityMeetingDetailBinding;
 import cynthianoel.mareu.model.Meeting;
@@ -37,7 +38,7 @@ public class MeetingDetailActivity extends AppCompatActivity {
         binding = ActivityMeetingDetailBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        getSupportActionBar().setTitle("Détails Réunion");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Détails Réunion");
 
         Intent intent = getIntent();
         Meeting meeting = (Meeting) intent.getParcelableExtra(MEETING_STRING);
