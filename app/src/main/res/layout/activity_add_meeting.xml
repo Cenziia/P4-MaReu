@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
+    <!-- Scrollview for all screen -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -13,6 +13,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+    <!-- Date picker button -->
     <Button
         android:id="@+id/btn_date_picker"
         style="@style/Widget.MaterialComponents.TimePicker.Button"
@@ -25,6 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <!-- Hour pickers box -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btn_hour_picker"
         android:layout_width="match_parent"
@@ -36,6 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_date_picker">
 
+    <!-- Hour picker start button -->
     <Button
         android:id="@+id/btn_hour_picker_start"
         style="@style/Widget.MaterialComponents.TimePicker.Button"
@@ -47,6 +51,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_hour_picker_end"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <!-- Hour picker end button -->
     <Button
         android:id="@+id/btn_hour_picker_end"
         style="@style/Widget.MaterialComponents.TimePicker.Button"
@@ -60,6 +65,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Spinner box -->
     <LinearLayout
         android:id="@+id/rooms_available_linear"
         android:layout_width="match_parent"
@@ -94,6 +100,7 @@
 
     </LinearLayout>
 
+    <!-- Participants text input box -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_participants"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -124,7 +131,7 @@
                     app:layout_constraintTop_toTopOf="@id/ti_participants">
                 </com.google.android.material.textfield.TextInputEditText>
 
-
+        <!-- Chip group box -->
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group_participants"
             android:layout_width="match_parent"
@@ -137,6 +144,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Subject -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_subject"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -162,6 +170,7 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <!-- Add meeting button -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
     android:id="@+id/btn_add_meeting"
     android:layout_width="wrap_content"
@@ -170,7 +179,7 @@
     android:hint="@string/validation_btn"
     android:textAlignment="center"
     android:textColorHint="@color/white"
-    android:textSize="16dp"
+    android:textSize="16sp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

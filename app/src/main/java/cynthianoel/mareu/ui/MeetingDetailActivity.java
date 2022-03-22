@@ -17,6 +17,7 @@ import java.util.Objects;
 import cynthianoel.mareu.databinding.ActivityMeetingDetailBinding;
 import cynthianoel.mareu.model.Meeting;
 
+// Meeting detail activity will be used later
 public class MeetingDetailActivity extends AppCompatActivity {
 
     protected static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);

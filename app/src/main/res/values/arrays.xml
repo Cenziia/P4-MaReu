@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- String array containing a static rooms' list -->
     <string-array name="rooms_list">
         <item>Skype</item>
         <item>Peach</item>

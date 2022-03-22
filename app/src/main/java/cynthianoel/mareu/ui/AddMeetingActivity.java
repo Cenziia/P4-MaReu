@@ -95,6 +95,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    // Listeners for date and times. Callback is used to differenciate start time and end time for Time picker
     private void dateTimeListeners() {
         binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +140,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         callback = "";
     }
 
+    // Transform inupted text to a chip
     private void addChips() {
         Chip chip = new Chip(this);
         ChipDrawable drawable = ChipDrawable.createFromAttributes(this, null, 0, R.style.Widget_MaterialComponents_Chip_Entry);
@@ -151,10 +153,12 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         binding.tiEdParticipants.setText("");
     }
 
+    // Check if participants' chip is an email
     private boolean checkingEmail(CharSequence email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
+    // Add inputed text to a chip on chips group
     private void addParticipantsEmail() {
         binding.tiEdParticipants.setOnEditorActionListener((view, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -169,6 +173,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         });
     }
 
+    // Build and add a meeting
     private void onSubmit() {
         String subject = binding.tiEdSubject.getEditableText().toString();
         String meetingRoom = spinnerMeetingRooms.getSelectedItem().toString();
@@ -177,6 +182,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         checkErrors();
 
         Date mDate = mCalDate.getTime();
+        // Will be used to eventually create slots later
         Date mTime = mCalDate.getTime();
 
         if (checkErrors()) {
@@ -186,6 +192,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         }
     }
 
+    // Check if inputs are filled and if there's at least one participant's email
     private boolean checkErrors() {
         String date = binding.btnDatePicker.getText().toString();
         String hourStart = binding.btnHourPickerStart.getText().toString();

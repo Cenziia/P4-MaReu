@@ -36,6 +36,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     private ActivityMeetingListBinding binding;
     private List<Meeting> mMeetings = new ArrayList<>();
 
+    // Static methods used for color circle. Used on view holder.
     public static Date addDay(int days) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, days);
@@ -102,6 +103,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         binding.meetingListRecyclerView.setAdapter(meetingListActivityAdapter);
     }
 
+    // Init menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -109,6 +111,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         return super.onCreateOptionsMenu(menu);
     }
 
+    // Menu's options
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -132,6 +135,7 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
         mMeetings = new ArrayList<>(mMeetingApiService.getMeetings());
     }
 
+    // Open AddMeetingActivity
     private void startAddMeetingActivity() {
         binding.startAddMeetingActivity.setOnClickListener(v -> {
             Intent intent = new Intent(getBaseContext(), AddMeetingActivity.class);

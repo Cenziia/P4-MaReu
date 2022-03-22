@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/menu_toolbar">
 
+    <!-- Date filter -->
     <item android:id="@+id/dateFilter"
         android:title="@string/filter_by_date"
         app:showAsAction="never"/>
 
+    <!-- Room filter - contains rooms' list -->
     <item android:id="@+id/roomFilter"
         android:title="@string/room"
         app:showAsAction="never">
@@ -55,6 +57,7 @@
         </menu>
     </item>
 
+    <!-- Reset filter -->
     <item android:id="@+id/resetFilter"
         android:title="@string/reset_filter"
         app:showAsAction="never"/>

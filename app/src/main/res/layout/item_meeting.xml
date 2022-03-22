@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
 
+    <!-- Meeting colored circle -->
     <ImageView
         android:id="@+id/circleImg"
         android:layout_width="40dp"
@@ -18,6 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Delete button -->
     <ImageButton
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
@@ -32,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
+    <!-- Meeting informations -->
     <LinearLayout
         android:id="@+id/meetingInfo"
         android:layout_width="wrap_content"
@@ -42,6 +44,7 @@
         app:layout_constraintStart_toEndOf="@id/circleImg"
         app:layout_constraintTop_toTopOf="@id/circleImg">
 
+        <!-- Subject -->
         <TextView
             android:id="@+id/subjectTxt"
             android:layout_width="wrap_content"
@@ -50,7 +53,7 @@
             tools:text="Meeting"/>
 
 
-
+        <!-- Start hour -->
         <TextView
             android:id="@+id/hourTxt"
             android:layout_width="wrap_content"
@@ -59,7 +62,7 @@
             tools:text=" Hour"/>
 
 
-
+        <!-- Room -->
         <TextView
             android:id="@+id/meetingRoomTxt"
             android:layout_width="wrap_content"
@@ -69,6 +72,7 @@
 
     </LinearLayout>
 
+        <!-- Participants' emails -->
         <TextView
             android:id="@+id/emailsTxt"
             android:layout_width="wrap_content"

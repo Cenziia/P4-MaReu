@@ -45,6 +45,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         Meeting meeting = mMeetings.get(position);
         holder.displayMeeting(mMeetings.get(position));
 
+        // Delete button listener
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +55,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             }
         });
 
+        // Item details opening listener
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,6 +102,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             mImageView.getDrawable().setColorFilter(meeting.getCircleColor(), PorterDuff.Mode.MULTIPLY);
         }
 
+        // Change circle's color depending on meeting's date and hour
         public void setCircleColor(Meeting meeting){
             SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
             SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);

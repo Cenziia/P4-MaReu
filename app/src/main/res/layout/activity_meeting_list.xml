@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Recycler view -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/meetingListRecyclerView"
         android:layout_width="match_parent"
@@ -13,6 +14,7 @@
         tools:layout_editor_absoluteY="16dp"
         tools:listitem="@layout/item_meeting" />
 
+    <!-- Add start button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/startAddMeetingActivity"
         android:layout_width="wrap_content"
