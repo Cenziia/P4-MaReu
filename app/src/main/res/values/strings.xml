@@ -1,9 +1,11 @@
 <resources>
     <!-- app -->
-    <string name="app_name">MaRéu</string>
-    <string name="hyphen">\"%s - \"</string>
+    <string name="app_name" translatable="false">MaRéu</string>
 
     <!-- MeetingListActivity -->
+    <string name="meeting_circle" translatable="false">meeting circle</string>
+    <string name="delete_button" translatable="false">delete button</string>
+    <string name="meeting_list_add_button" translatable="false">Add</string>
 
     <!-- Menu -->
     <string name="filter_by_date">Filter by date</string>
@@ -21,6 +23,7 @@
     <string name="epona" translatable="false">Epona</string>
 
     <!-- AddMeetingActivity -->
+    <string name="new_meeting">New Meeting</string>
     <string name="add_meeting_date_error">Please choose a date</string>
     <string name="add_meeting_start_time_error">Please choose a start time</string>
     <string name="add_meeting_end_time_error">Please choose a end time</string>
@@ -29,35 +32,44 @@
     <string name="add_meeting_participant_email_error">Please type and valid an email address</string>
     <string name="add_meeting_meeting_created">Meeting created !</string>
     <string name="add_meeting_email_invalid">Invalid email address</string>
-    <string name="add_meeting_meeting_description">description</string>
-    <string name="meeting_start_selected">\"Start : \"</string>
-    <string name="meeting_end_selected">\"End : \"</string>
-    <string name="date_picker_btn">Date</string>
+    <string name="add_meeting_meeting_description" translatable="false">description</string>
+    <string name="meeting_end_selected">End :\t</string>
+    <string name="date_picker_btn" translatable="false">Date</string>
     <string name="hour_picker_btn_start">Start hour</string>
     <string name="hour_picker_btn_end">End hour</string>
     <string name="available_rooms">Available rooms</string>
-    <string name="participants">Participants</string>
+    <string name="participants" translatable="false">Participants</string>
     <string name="subject">Meeting topic</string>
     <string name="validation_btn">Validate</string>
+    <string name="add_meeting_room_selected">Selected room : </string>
+    <string name="add_meeting_select_a_room">Select a room</string>
+    <string name="date" translatable="false">Date : \t</string>
 
     <!-- MeetingDetailsActivity -->
     <string name="activity_name_meeting_detail">Meeting details</string>
+    <string name="meeting_detail_date" translatable="false">Date :\t</string>
 
-    <string name="add">Add</string>
-    <string name="meeting_circle">meeting circle</string>
-    <string name="delete_button">delete button</string>
-    <string name="participant_name">Participant\'s name</string>
-    <string name="description">Description</string>
-    <string name="on_time_set_text_title">Meeting\'s start</string>
-    <string name="date_time" translatable="false">%1$02dh%2$02d</string>
+    <!-- Tools -->
+    <string name="tools_participants" translatable="false">participants</string>
+    <string name="tools_description" translatable="false">description</string>
+    <string name="tools_room" translatable="false">room</string>
+    <string name="tools_hour" translatable="false">hour</string>
+    <string name="tools_date" translatable="false">date</string>
+    <string name="tools_subject" translatable="false">subject</string>
+
+    <!-- @ -->
+    <string name="hyphen" translatable="false">%s -\t</string>
     <string name="spaceListIemTxt" translatable="false">\t-\t</string>
-    <string name="validation">Validation button</string>
-    <string name="add_meeting_room_selected">Selected room : </string>
-    <string name="select_a_room">Select a room</string>
-    <string name="a_meeting_subject">Meeting A</string>
-    <string name="new_meeting">Nouvelle Réunion</string>
-    <string name="date">\"Date : \"</string>
-    <string name="datetime_string_format">%s%s</string>
-    <string name="meeting_detail_date">\"Date : \"</string>
+    <string name="datetime_string_format" translatable="false">%s%s</string>
+    <string name="date_time" translatable="false">%1$02dh%2$02d</string>
+
+
+    <!-- Some activities -->
+    <string name="meeting_start_selected">Start :\t</string>
+
+    <string name="participant_name">Participant\'s name</string>
+    <string name="description" translatable="false">Description</string>
+    <string name="on_time_set_text_title">Meeting\'s start</string>
+    <string name="validation" translatable="false">Validation button</string>
 
 </resources>

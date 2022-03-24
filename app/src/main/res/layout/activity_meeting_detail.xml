@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="sujet"/>
+        tools:text="@string/tools_subject"/>
 
     <!-- Date -->
     <TextView
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/meeting_detail_subject"
-        tools:text="date"/>
+        tools:text="@string/tools_date"/>
 
     <!-- Hour -->
     <TextView
@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/meeting_detail_date"
-        tools:text="heure"/>
+        tools:text="@string/tools_hour"/>
 
     <!-- Meeting room -->
     <TextView
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/meeting_detail_hour"
-        tools:text="room"/>
+        tools:text="@string/tools_room"/>
 
     <!-- Participants -->
     <TextView
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/meeting_detail_room"
-        tools:text="@string/participants"/>
+        tools:text="@string/tools_participants"/>
 
     <!-- Description -->
     <TextView
@@ -69,6 +69,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/meeting_detail_participants"
-        tools:text="@string/description"/>
+        tools:text="@string/tools_description"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

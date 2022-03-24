@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MaRéu</string>
 
+    <string name="filter_by_date">Filtrer par date</string>
+    <string name="room">Filtrer par salle</string>
+    <string name="reset_filter">Réinitialiser</string>
+    <string name="new_meeting">Nouvelle Réunion</string>
+    <string name="add_meeting_date_error">Veuillez choisir une date</string>
+    <string name="add_meeting_start_time_error">Veuillez choisir une heure de début</string>
+    <string name="add_meeting_end_time_error">Veuillez choisir une heure de fin</string>
+    <string name="add_meeting_subject_error">Veuillez choisir un sujet</string>
+    <string name="add_meeting_room_error">Veuillez choisir une salle</string>
+    <string name="add_meeting_participant_email_error">Veuillez taper et valider une adresse mail valide</string>
+    <string name="add_meeting_meeting_created">Réunion créée !</string>
+    <string name="add_meeting_email_invalid">Adresse mail invalide</string>
+    <string name="meeting_end_selected">Fin :\t</string>
+    <string name="hour_picker_btn_start">Heure de début</string>
+    <string name="hour_picker_btn_end">Heure de fin</string>
+    <string name="available_rooms">Salles disponibles</string>
+    <string name="subject">Sujet de la réunion</string>
+    <string name="validation_btn">Valider</string>
+    <string name="add_meeting_room_selected">Salle sélectionnée :\t</string>
+    <string name="add_meeting_select_a_room">Sélectionner une salle :\t</string>
+    <string name="activity_name_meeting_detail">Détails de la réunion</string>
+    <string name="meeting_start_selected">Début :\t</string>
+    <string name="participant_name">Nom du participant</string>
+    <string name="on_time_set_text_title">Début de la réunion</string>
 </resources>

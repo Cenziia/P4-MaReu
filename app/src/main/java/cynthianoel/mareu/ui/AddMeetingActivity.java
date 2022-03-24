@@ -85,7 +85,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                binding.roomsAvailableTxt.setText(R.string.select_a_room);
+                binding.roomsAvailableTxt.setText(R.string.add_meeting_select_a_room);
             }
         });
     }

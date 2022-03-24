@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            tools:text="Meeting"/>
+            tools:text="@string/tools_subject"/>
 
 
         <!-- Start hour -->
@@ -59,7 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            tools:text=" Hour"/>
+            tools:text="@string/tools_hour"/>
 
 
         <!-- Room -->
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            tools:text=" Room"/>
+            tools:text="@string/tools_room"/>
 
     </LinearLayout>
 
