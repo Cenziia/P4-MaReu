@@ -80,7 +80,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                binding.roomsAvailableTxt.setText(R.string.room_selected);
+                binding.roomsAvailableTxt.setText(R.string.add_meeting_room_selected);
             }
 
             @Override
@@ -120,7 +120,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         mCalDate.set(year, month, dayOfMonth);
         Date date1 = mCalDate.getTime();
         String date = dateFormat.format(date1);
-        binding.btnDatePicker.setText(String.format("%s%s", getString(R.string.date), date));
+        binding.btnDatePicker.setText(String.format(getString(R.string.datetime_string_format), getString(R.string.date), date));
     }
 
     @Override
@@ -129,9 +129,9 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             mCalDate.set(Calendar.HOUR_OF_DAY, hour);
             mCalDate.set(Calendar.MINUTE, minute);
             mCalDate.set(Calendar.SECOND, 0);
-            binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ", getString(R.string.date_time, hour, minute)));
+            binding.btnHourPickerStart.setText(String.format(getString(R.string.datetime_string_format), getString(R.string.meeting_start_selected), getString(R.string.date_time, hour, minute)));
         } else if (callback.equalsIgnoreCase(END_TIME)) {
-            binding.btnHourPickerEnd.setText(String.format("%s%s", "Fin : ", getString(R.string.date_time, hour, minute)));
+            binding.btnHourPickerEnd.setText(String.format(getString(R.string.datetime_string_format), getString(R.string.meeting_end_selected), getString(R.string.date_time, hour, minute)));
         }
         callback = "";
     }
@@ -161,7 +161,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
                 if (checkingEmail(view.getText())) {
                     addChips();
                 } else {
-                    Toast.makeText(getBaseContext(), getString(R.string.email_invalid), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(), getString(R.string.add_meeting_email_invalid), Toast.LENGTH_SHORT).show();
                 }
                 return true;
             }
@@ -173,7 +173,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     private void onSubmit() {
         String subject = binding.tiEdSubject.getEditableText().toString();
         String meetingRoom = spinnerMeetingRooms.getSelectedItem().toString();
-        String description = "description";
+        String description = getString(R.string.add_meeting_meeting_description);
 
         checkErrors();
 
@@ -183,7 +183,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
         if (checkErrors()) {
             mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, mTime, mTime, description, mDate, R.drawable.ic_baseline_circle_24));
-            Toast.makeText(this, R.string.meeting_created, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.add_meeting_meeting_created, Toast.LENGTH_SHORT).show();
             finish();
         }
     }
@@ -197,23 +197,23 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         String meetingRoom = spinnerMeetingRooms.getSelectedItem().toString();
 
         if (date.isEmpty()) {
-            binding.btnDatePicker.setError("Please choose a date");
+            binding.btnDatePicker.setError(getString(R.string.add_meeting_date_error));
             return false;
         }
         if (hourStart.isEmpty()) {
-            binding.btnHourPickerStart.setError("Please choose a start time");
+            binding.btnHourPickerStart.setError(getString(R.string.add_meeting_start_time_error));
             return false;
         }
         if (hourEnd.isEmpty()) {
-            binding.btnHourPickerEnd.setError("Please choose a end time");
+            binding.btnHourPickerEnd.setError(getString(R.string.add_meeting_end_time_error));
             return false;
         }
         if (subject.isEmpty()) {
-            binding.tiEdSubject.setError("Please type a subject");
+            binding.tiEdSubject.setError(getString(R.string.add_meeting_subject_error));
             return false;
         }
         if (meetingRoom.isEmpty()) {
-            binding.roomsAvailableTxt.setError("Please choose a room");
+            binding.roomsAvailableTxt.setError(getString(R.string.add_meeting_room_error));
             return false;
         }
 
@@ -225,7 +225,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         }
 
         if (binding.chipGroupParticipants.getChildCount() < 1) {
-            binding.tiEdParticipants.setError("Please type and valid an email address");
+            binding.tiEdParticipants.setError(getString(R.string.add_meeting_participant_email_error));
             return false;
         }
         else {

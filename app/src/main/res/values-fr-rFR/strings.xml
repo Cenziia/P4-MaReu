@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MaRéu</string>
-    <string name="add">Aj</string>
-    <string name="meeting_circle">cercle réunion</string>
-    <string name="delete_button">bouton suppression</string>
-    <string name="filter_by_date">Filtrer par date</string>
-    <string name="room">Filtrer par salle</string>
-    <string name="available_rooms">Salles disponibles</string>
-    <string name="participant_name">Nom du participant</string>
-    <string name="description">Description</string>
-    <string name="validation_btn">Valider</string>
-    <string name="hour_picker_btn_start">Heure de début</string>
-    <string name="hour_picker_btn_end">Heure de fin</string>
-    <string name="date_picker_btn">Date</string>
-    <string name="participants">Participants</string>
-    <string name="email_invalid">Adresse email non valide</string>
-    <string name="subject">Sujet de la réunion</string>
-    <string name="on_time_set_text_title">Début de la réunion</string>
-    <string name="reset_filter">Réinitialiser</string>
-    <string name="validation">bouton de validation</string>
-    <string name="room_selected">Salle sélectionnée :</string>
-    <string name="select_a_room">Sélectionner une salle :</string>
-    <string name="meeting_created">Réunion créée !</string>
+
 </resources>

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
+import cynthianoel.mareu.R;
 import cynthianoel.mareu.databinding.ActivityMeetingDetailBinding;
 import cynthianoel.mareu.model.Meeting;
 
@@ -38,21 +39,21 @@ public class MeetingDetailActivity extends AppCompatActivity {
         binding = ActivityMeetingDetailBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Détails Réunion");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.activity_name_meeting_detail);
 
         Intent intent = getIntent();
         Meeting meeting = intent.getParcelableExtra(MEETING_STRING);
         binding.meetingDetailSubject.setText(meeting.getSubject());
         Date mHour = meeting.getHourStart();
         String hour = hourFormat.format(mHour);
-        binding.meetingDetailHour.setText(String.format("%s%s", " Début : ", hour));
+        binding.meetingDetailHour.setText(String.format(getString(R.string.datetime_string_format), getString(R.string.meeting_start_selected), hour));
 
         binding.meetingDetailParticipants.setText(meeting.getParticipants());
         binding.meetingDetailRoom.setText(meeting.getMeetingRoom());
         binding.meetingDetailDescription.setText(meeting.getDescription());
         Date mDate = meeting.getDate();
         String date = dateFormat.format(mDate);
-        binding.meetingDetailDate.setText(String.format("%s%s", "Date : ", date));
+        binding.meetingDetailDate.setText(String.format(getString(R.string.datetime_string_format), getString(R.string.meeting_detail_date), date));
     }
 
     @Override
