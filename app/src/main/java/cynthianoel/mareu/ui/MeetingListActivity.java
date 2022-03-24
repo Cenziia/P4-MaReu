@@ -50,18 +50,15 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     }
 
     public static String today() {
-        String cal1 = sdfDate.format(addDay(0));
-        return cal1;
+        return sdfDate.format(addDay(0));
     }
 
     public static String tomorrow() {
-        String cal1 = sdfDate.format(addDay(1));
-        return cal1;
+        return sdfDate.format(addDay(1));
     }
 
     public static String currentHour() {
-        String hour1 = sdfHour.format(addHour(0));
-        return hour1;
+        return sdfHour.format(addHour(0));
     }
 
     @Override

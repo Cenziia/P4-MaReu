@@ -5,7 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import cynthianoel.mareu.model.Employee;
 import cynthianoel.mareu.model.Meeting;
 import cynthianoel.mareu.model.MeetingRoom;
 import cynthianoel.mareu.service.MeetingApiService;
@@ -13,24 +12,7 @@ import cynthianoel.mareu.service.MeetingApiService;
 public class DummyMeetingApiService implements MeetingApiService {
 
     private final List<MeetingRoom> meetingRooms = DummyMeetingRoomGenerator.generateMeetingRooms();
-    private final List<Employee> employees = DummyEmployeeGenerator.generateEmployees();
     private final List<Meeting> meetings = DummyMeetingGenerator.generateMeetings();
-
-    /**
-     * Get meetings' rooms' list
-     */
-    @Override
-    public List<MeetingRoom> getMeetingRooms() {
-        return meetingRooms;
-    }
-
-    /**
-     * Get employees' list
-     */
-    @Override
-    public List<Employee> getEmployees() {
-        return employees;
-    }
 
     /**
      * Get meetings' list
@@ -74,7 +56,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     /**
-     * Get a dynamic list of meetings' rooms
+     * Get a dynamic list of available meetings' rooms
      */
     @Override
     public List<MeetingRoom> getAvailableMeetingRoomsList() {

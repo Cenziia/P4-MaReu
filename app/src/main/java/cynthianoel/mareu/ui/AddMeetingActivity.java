@@ -55,9 +55,9 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         View view = binding.getRoot();
         setContentView(view);
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Nouvelle Réunion");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.new_meeting);
 
-        this.spinnerMeetingRooms = (Spinner) binding.spinnerRoomsAvailable;
+        this.spinnerMeetingRooms = binding.spinnerRoomsAvailable;
 
         MeetingRoom[] meetingRooms = mMeetingApiService.getAvailableMeetingRoomsList().toArray(new MeetingRoom[0]);
 
@@ -78,7 +78,6 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                MeetingRoom meetingRoom = (MeetingRoom) adapter.getItem(position);
                 binding.roomsAvailableTxt.setText(R.string.room_selected);
             }
 
@@ -90,20 +89,15 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     }
 
     private void addMeetingButtonListener() {
-        binding.btnAddMeeting.setOnClickListener(v -> {
-            onSubmit();
-        });
+        binding.btnAddMeeting.setOnClickListener(v -> onSubmit());
     }
 
-    // Listeners for date and times. Callback is used to differenciate start time and end time for Time picker
+    // Listeners for date and times. Callback is used to differentiate start time and end time for Time picker
     private void dateTimeListeners() {
-        binding.btnDatePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePicker = new DatePickerDialog(AddMeetingActivity.this, AddMeetingActivity.this, 2022, 1, 2);
-                datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                datePicker.show();
-            }
+        binding.btnDatePicker.setOnClickListener(v -> {
+            DatePickerDialog datePicker = new DatePickerDialog(AddMeetingActivity.this, AddMeetingActivity.this, 2022, 1, 2);
+            datePicker.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+            datePicker.show();
         });
         binding.btnHourPickerStart.setOnClickListener(view -> {
             callback = "for_start_time";
@@ -140,7 +134,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         callback = "";
     }
 
-    // Transform inupted text to a chip
+    // Transform inputted text to a chip
     private void addChips() {
         Chip chip = new Chip(this);
         ChipDrawable drawable = ChipDrawable.createFromAttributes(this, null, 0, R.style.Widget_MaterialComponents_Chip_Entry);
@@ -158,7 +152,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    // Add inputed text to a chip on chips group
+    // Add inputted text to a chip on chips group
     private void addParticipantsEmail() {
         binding.tiEdParticipants.setOnEditorActionListener((view, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -187,7 +181,7 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
 
         if (checkErrors()) {
             mMeetingApiService.addMeeting(new Meeting(subject, participants.toString(), meetingRoom, mTime, mTime, description, mDate, R.drawable.ic_baseline_circle_24));
-            Toast.makeText(this, "Réunion créée !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.meeting_created, Toast.LENGTH_SHORT).show();
             finish();
         }
     }

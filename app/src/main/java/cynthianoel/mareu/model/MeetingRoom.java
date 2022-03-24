@@ -35,7 +35,7 @@ public class MeetingRoom implements Parcelable {
     /**
      * Available
      */
-    private boolean available;
+    private final boolean available;
 
     /**
      * Constructor
@@ -74,10 +74,6 @@ public class MeetingRoom implements Parcelable {
 
     public boolean getAvailable() {
         return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 
 

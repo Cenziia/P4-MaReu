@@ -4,23 +4,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cynthianoel.mareu.model.Employee;
 import cynthianoel.mareu.model.Meeting;
 import cynthianoel.mareu.model.MeetingRoom;
 
 public interface MeetingApiService {
-
-    /**
-     * Get all Meeting Rooms
-     * @return List
-     */
-    List<MeetingRoom> getMeetingRooms();
-
-    /**
-     * Get all Employees
-     * @return List
-     */
-    List<Employee> getEmployees();
 
     /**
      * Get all meetings

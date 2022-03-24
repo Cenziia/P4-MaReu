@@ -1,5 +1,6 @@
 package cynthianoel.mareu.ui;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
@@ -27,6 +29,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
     private final ArrayList<Meeting> mMeetings;
 
     private final MeetingApiService meetingApiService = DI.getMeetingApiService();
+
 
     public MeetingListActivityAdapter(ArrayList<Meeting> meetingArrayList) {
         this.mMeetings = meetingArrayList;
@@ -46,22 +49,14 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         holder.displayMeeting(mMeetings.get(position));
 
         // Delete button listener
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                meetingApiService.deleteMeeting(meeting);
-               notifyItemRemoved(holder.getAbsoluteAdapterPosition());
-               notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
-            }
+        holder.mDeleteButton.setOnClickListener(v -> {
+            meetingApiService.deleteMeeting(meeting);
+           notifyItemRemoved(holder.getAbsoluteAdapterPosition());
+           notifyItemRangeChanged(holder.getAbsoluteAdapterPosition(), mMeetings.size());
         });
 
         // Item details opening listener
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.getContext().startActivity(MeetingDetailActivity.newInstance(v.getContext(),meeting));
-            }
-        });
+        holder.itemView.setOnClickListener(v -> v.getContext().startActivity(MeetingDetailActivity.newInstance(v.getContext(),meeting)));
     }
 
     @Override
@@ -93,17 +88,18 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
         public void displayMeeting(Meeting meeting){
             Date hourDate = meeting.getHourStart();
             String hour = hourFormat.format(hourDate);
+            final Context context = mImageView.getContext();
 
-            mSubject.setText(meeting.getSubject() + " - ");
-            mHour.setText(String.format(hour) + " - ");
+            mSubject.setText(String.format(context.getString(R.string.hyphen), meeting.getSubject()));
+            mHour.setText(String.format(context.getString(R.string.hyphen), hour));
             mMeetingRoom.setText(meeting.getMeetingRoom());
             mEmails.setText(meeting.getParticipants());
-            setCircleColor(meeting);
+            setCircleColor(meeting, context);
             mImageView.getDrawable().setColorFilter(meeting.getCircleColor(), PorterDuff.Mode.MULTIPLY);
         }
 
         // Change circle's color depending on meeting's date and hour
-        public void setCircleColor(Meeting meeting){
+        public void setCircleColor(Meeting meeting, Context context){
             SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
             SimpleDateFormat sdfHour = new SimpleDateFormat("HH", Locale.FRANCE);
             Date meetingDate = meeting.getDate();
@@ -131,7 +127,7 @@ public class MeetingListActivityAdapter extends RecyclerView.Adapter<MeetingList
             else if (meetingDateString.equals(MeetingListActivity.today())
                     && meetingHour.before(MeetingListActivity.addHour(3))
                     && meetingHour.after(MeetingListActivity.addHour(1))) {
-                meeting.setCircleColor(Color.parseColor("#FFAC1C"));
+                meeting.setCircleColor(ContextCompat.getColor(context, R.color.orange));
             }
             // If meeting is today after 3 hours
             else if (meetingDateString.equals(MeetingListActivity.today())

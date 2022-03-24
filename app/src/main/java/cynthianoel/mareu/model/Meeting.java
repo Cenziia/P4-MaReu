@@ -23,9 +23,13 @@ public class Meeting implements Parcelable {
             return new Meeting[size];
         }
     };
-    private String subject, participants, meetingRoom, description;
+    private final String subject;
+    private final String participants;
+    private final String meetingRoom;
+    private final String description;
     private long date;
-    private long hourStart, hourEnd;
+    private final long hourStart;
+    private final long hourEnd;
     private int circleColor;
 
 
@@ -68,40 +72,16 @@ public class Meeting implements Parcelable {
         return subject;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
     public String getParticipants() {
         return participants;
-    }
-
-    public void setParticipants(String participants) {
-        this.participants = participants;
     }
 
     public String getMeetingRoom() {
         return meetingRoom;
     }
 
-    public void setMeetingRoom(String meetingRoom) {
-        this.meetingRoom = meetingRoom;
-    }
-
     public Date getHourStart() {
         return new Date(hourStart);
-    }
-
-    public void setHourStart(Date hourStart1) {
-        hourStart = hourStart1.getTime();
-    }
-
-    public Date getHourEnd() {
-        return new Date(hourEnd);
-    }
-
-    public void setHourEnd(Date hourEnd1) {
-        hourEnd = hourEnd1.getTime();
     }
 
     public Date getDate() {
@@ -114,10 +94,6 @@ public class Meeting implements Parcelable {
 
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getCircleColor() { return circleColor;}
