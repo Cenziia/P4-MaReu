@@ -10,7 +10,7 @@ import cynthianoel.mareu.model.MeetingRoom;
 
 public abstract class DummyMeetingRoomGenerator {
 
-    public static List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
+    public static final List<MeetingRoom> DUMMY_MEETING_ROOMS = Arrays.asList(
             new MeetingRoom(0,"Skype",true),
             new MeetingRoom(1, "Peach", true),
             new MeetingRoom(2,"Mario", true),

@@ -37,8 +37,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import cynthianoel.mareu.di.DI;
-import cynthianoel.mareu.service.MeetingApiService;
 import cynthianoel.mareu.ui.MeetingListActivity;
 import cynthianoel.utils.DeleteViewAction;
 
@@ -54,20 +52,17 @@ public class InstrumentedTest {
     // This is fixed
     private static final int ITEMS_COUNT = 3;
     @Rule
-    public ActivityTestRule<MeetingListActivity> mActivityRule =
-            new ActivityTestRule(MeetingListActivity.class, false, true);
+    public final ActivityTestRule<MeetingListActivity> mActivityRule =
+            new ActivityTestRule<>(MeetingListActivity.class, false, true);
     // For Filter by date test
-    int year = 2022;
-    int month = 3;
-    int day = 22;
-    private MeetingListActivity mActivity;
-    private MeetingApiService mMeetingApiService;
+    final int year = 2022;
+    final int month = 3;
+    final int day = 24;
 
     @Before
     public void setUp() {
-        mActivity = mActivityRule.getActivity();
-        assertThat(mActivity, IsNull.notNullValue());
-        mMeetingApiService = DI.getMeetingApiService();
+        MeetingListActivity activity = mActivityRule.getActivity();
+        assertThat(activity, IsNull.notNullValue());
     }
 
     /**
@@ -86,7 +81,7 @@ public class InstrumentedTest {
     @Test
     public void B_myMeetingsListMenu_filterAction_shouldFilterByDate() {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        onView(withText("Filtrer par date")).perform(click());
+        onView(withText(R.string.filter_by_date)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(year, month, day));
         onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.meetingListRecyclerView)).check((withItemCount(3)));
@@ -157,8 +152,9 @@ public class InstrumentedTest {
     @Test
     public void E_myMeetingsListMenu_filterAction_shouldFilterByRoom() throws InterruptedException {
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().getTargetContext());
-        onView(withText("Filtrer par salle")).perform(click());
-        onView(withText("Luigi")).perform(click());
+        onView(withText(R.string.room)).perform(click());
+        Thread.sleep(3000);
+        onView(withText(R.string.luigi)).perform(click());
         Thread.sleep(3000);
         onView(withId(R.id.meetingListRecyclerView)).check((withItemCount(2)));
     }
