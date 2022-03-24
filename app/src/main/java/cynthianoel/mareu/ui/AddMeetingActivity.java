@@ -37,6 +37,8 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
     private final MeetingApiService mMeetingApiService = DI.getMeetingApiService();
     ActivityAddMeetingBinding binding;
     String callback = "";
+    private final String START_TIME = "for_start_time";
+    private final String END_TIME = "for_end_time";
     private Spinner spinnerMeetingRooms;
     private StringBuilder participants;
     private Calendar mCalDate;
@@ -100,12 +102,12 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
             datePicker.show();
         });
         binding.btnHourPickerStart.setOnClickListener(view -> {
-            callback = "for_start_time";
+            callback = START_TIME;
             DialogFragment timePicker = new TimePickerFragment();
             timePicker.show(getSupportFragmentManager(), "timePicker");
         });
         binding.btnHourPickerEnd.setOnClickListener(view -> {
-            callback = "for_end_time";
+            callback = END_TIME;
             DialogFragment timePicker = new TimePickerFragment();
             timePicker.show(getSupportFragmentManager(), "timePicker");
         });
@@ -118,17 +120,17 @@ public class AddMeetingActivity extends AppCompatActivity implements DatePickerD
         mCalDate.set(year, month, dayOfMonth);
         Date date1 = mCalDate.getTime();
         String date = dateFormat.format(date1);
-        binding.btnDatePicker.setText(String.format("%s%s", "Date : ", date));
+        binding.btnDatePicker.setText(String.format("%s%s", getString(R.string.date), date));
     }
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-        if (callback.equalsIgnoreCase("for_start_time")) {
+        if (callback.equalsIgnoreCase(START_TIME)) {
             mCalDate.set(Calendar.HOUR_OF_DAY, hour);
             mCalDate.set(Calendar.MINUTE, minute);
             mCalDate.set(Calendar.SECOND, 0);
             binding.btnHourPickerStart.setText(String.format("%s%s", "Début : ", getString(R.string.date_time, hour, minute)));
-        } else if (callback.equalsIgnoreCase("for_end_time")) {
+        } else if (callback.equalsIgnoreCase(END_TIME)) {
             binding.btnHourPickerEnd.setText(String.format("%s%s", "Fin : ", getString(R.string.date_time, hour, minute)));
         }
         callback = "";

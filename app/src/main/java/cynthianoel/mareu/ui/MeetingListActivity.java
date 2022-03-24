@@ -70,16 +70,6 @@ public class MeetingListActivity extends AppCompatActivity implements DatePicker
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         resetFilter();

@@ -3,7 +3,6 @@ package cynthianoel.mareu.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
@@ -30,7 +29,7 @@ public class MeetingDetailActivity extends AppCompatActivity {
         Log.d(TAG, "> newInstance");
         Intent intent = new Intent(context, MeetingDetailActivity.class);
         Log.d(TAG, "meeting : " + meeting);
-        intent.putExtra(MEETING_STRING, (Parcelable) meeting);
+        intent.putExtra(MEETING_STRING, meeting);
         Log.d(TAG, "< newInstance");
         return intent;
     }
@@ -42,7 +41,7 @@ public class MeetingDetailActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Détails Réunion");
 
         Intent intent = getIntent();
-        Meeting meeting = (Meeting) intent.getParcelableExtra(MEETING_STRING);
+        Meeting meeting = intent.getParcelableExtra(MEETING_STRING);
         binding.meetingDetailSubject.setText(meeting.getSubject());
         Date mHour = meeting.getHourStart();
         String hour = hourFormat.format(mHour);

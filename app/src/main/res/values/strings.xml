@@ -36,5 +36,6 @@
     <string name="a_meeting_subject">Meeting A</string>
     <string name="new_meeting">Nouvelle Réunion</string>
     <string name="hyphen">\"%s - \"</string>
+    <string name="date">\"Date : \"</string>
 
 </resources>
